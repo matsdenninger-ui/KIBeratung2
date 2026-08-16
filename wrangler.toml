@@ -1,0 +1,16 @@
+name = "claude-demo-proxy"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Domains, die den Proxy aufrufen duerfen. Kommagetrennt, ohne Slash am Ende.
+# Beispiel: "https://mats-denninger.de,https://www.mats-denninger.de"
+ALLOWED_ORIGINS = "http://localhost:8000"
+
+# Optional: "claude-sonnet-5" ist deutlich guenstiger als der Standard.
+MODEL = "claude-opus-5"
+
+# Fuer Rate-Limiting. ID nach `wrangler kv namespace create RATE_LIMIT` eintragen.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "HIER_DIE_KV_ID_EINTRAGEN"

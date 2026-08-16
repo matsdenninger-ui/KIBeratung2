@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mats Denninger — KI-Automatisierung für Vertrieb &amp; Verwaltung</title>
+<meta name="description" content="Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. 14 Tage, Festpreis, ein Prozess läuft am Ende bereits.">
+<style>
+  :root {
+    --bg: #1d1d1f;
+    --bg-elevated: #2a2a2d;
+    --bg-card: #232326;
+    --text: #f5f5f7;
+    --text-muted: #a1a1a6;
+    --gold: #c9a445;
+    --gold-soft: #d9bc72;
+    --wine: #722f3b;
+    --wine-bright: #9c4250;
+    --border: rgba(255,255,255,0.09);
+    --radius: 18px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden;
+  }
+  ::selection { background: var(--wine); color: #fff; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(29,29,31,0.72); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1024px; margin: 0 auto; padding: 0 24px;
+    height: 52px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 26px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 980px;
+    font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--gold-soft); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 92vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 130px 24px 80px; position: relative;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(201,164,69,0.10), transparent),
+      radial-gradient(ellipse 45% 35% at 80% 90%, rgba(114,47,59,0.18), transparent);
+    pointer-events: none;
+  }
+  .hero > * { position: relative; }
+  .hero-eyebrow {
+    color: var(--gold); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6.2vw, 68px); font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1.06; max-width: 880px;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(120deg, var(--gold-soft), var(--gold) 45%, var(--wine-bright));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p {
+    margin-top: 26px; font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--text-muted); max-width: 660px;
+  }
+  .hero-cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .hero-reassure { margin-top: 20px; font-size: 13.5px; color: var(--text-muted); opacity: .85; }
+
+  .btn {
+    display: inline-block; padding: 14px 30px; border-radius: 980px;
+    font-size: 16px; font-weight: 500; text-decoration: none;
+    transition: all .25s ease; cursor: pointer; border: none; font-family: inherit;
+  }
+  .btn-primary { background: var(--gold); color: #1a1a1c; }
+  .btn-primary:hover { background: var(--gold-soft); transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.25); }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-small { padding: 10px 22px; font-size: 14px; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 100px 24px; }
+  .container { max-width: 1024px; margin: 0 auto; }
+  .narrow { max-width: 760px; margin: 0 auto; }
+  .section-label {
+    color: var(--wine-bright); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  h2 { font-size: clamp(29px, 4.2vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.14; margin-bottom: 18px; }
+  h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+  .section-intro { color: var(--text-muted); font-size: 18px; max-width: 640px; }
+
+  /* ---------- Problem ---------- */
+  #problem { background: linear-gradient(180deg, var(--bg), #191919 55%, var(--bg)); }
+  .pain-list { list-style: none; margin-top: 40px; display: grid; gap: 2px; }
+  .pain-list li {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px 24px; background: var(--bg-card);
+    border-left: 2px solid var(--wine); font-size: 16.5px;
+  }
+  .pain-list li:first-child { border-radius: 12px 12px 0 0; }
+  .pain-list li:last-child { border-radius: 0 0 12px 12px; }
+  .pain-list .mark { color: var(--wine-bright); font-weight: 700; flex-shrink: 0; }
+  .pain-conclusion {
+    margin-top: 34px; font-size: 19px; line-height: 1.6;
+    padding-left: 24px; border-left: 2px solid var(--gold);
+  }
+  .pain-conclusion strong { color: var(--gold-soft); font-weight: 600; }
+
+  /* ---------- Offer ---------- */
+  .offer-card {
+    margin-top: 44px; background: var(--bg-card);
+    border: 1px solid rgba(201,164,69,0.28); border-radius: var(--radius);
+    overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+  }
+  .offer-head {
+    padding: 38px 38px 30px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(160deg, rgba(114,47,59,0.22), transparent 70%);
+  }
+  .offer-name { font-size: clamp(26px, 3.6vw, 34px); font-weight: 700; letter-spacing: -0.02em; }
+  .offer-tagline { color: var(--text-muted); margin-top: 10px; font-size: 17px; }
+  .offer-body { padding: 34px 38px; }
+  @media (max-width: 640px) { .offer-head, .offer-body { padding: 26px 22px; } }
+
+  .deliverables { list-style: none; display: grid; gap: 22px; }
+  .deliverables li { display: flex; gap: 18px; align-items: flex-start; }
+  .deliv-num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
+    background: rgba(201,164,69,0.15); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; margin-top: 2px;
+  }
+  .deliverables h4 { font-size: 16.5px; font-weight: 600; margin-bottom: 4px; }
+  .deliverables p { color: var(--text-muted); font-size: 15px; }
+
+  .offer-price-row {
+    display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end;
+    margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--border);
+  }
+  .price-main { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; color: var(--gold); line-height: 1; }
+  .price-note { font-size: 13.5px; color: var(--text-muted); margin-top: 8px; }
+
+  .guarantee {
+    margin-top: 30px; padding: 22px 24px; border-radius: 14px;
+    background: rgba(201,164,69,0.07); border: 1px solid rgba(201,164,69,0.28);
+  }
+  .guarantee strong { color: var(--gold-soft); }
+  .guarantee p { font-size: 15.5px; }
+  .guarantee p + p { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+
+  .capacity {
+    display: inline-flex; align-items: center; gap: 9px; margin-top: 26px;
+    font-size: 14px; color: var(--text-muted);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.18); }
+
+  .offer-actions { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+  /* ---------- Ablauf ---------- */
+  #ablauf { background: linear-gradient(180deg, var(--bg), #191919 55%, var(--bg)); }
+  .timeline { margin-top: 46px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+  .step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 26px 24px; position: relative; }
+  .step-day { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .step h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .step p { color: var(--text-muted); font-size: 14.5px; }
+
+  /* ---------- Demo ---------- */
+  .demo-window {
+    margin-top: 44px; border-radius: var(--radius); background: #141416;
+    border: 1px solid var(--border); overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  }
+  .demo-titlebar { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: #1c1c1f; border-bottom: 1px solid var(--border); }
+  .traffic-light { width: 12px; height: 12px; border-radius: 50%; }
+  .tl-red { background: #ff5f57; } .tl-yellow { background: #febc2e; } .tl-green { background: #28c840; }
+  .demo-titlebar .demo-title { flex: 1; text-align: center; font-size: 13px; color: var(--text-muted); margin-right: 52px; }
+  .demo-body { padding: 28px; }
+  @media (max-width: 640px) { .demo-body { padding: 18px; } }
+
+  .prompt-label { margin-bottom: 10px; }
+  .prompt-label span { font-size: 12.5px; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; }
+  .prompt-box {
+    background: #1a1a1d; border: 1px solid rgba(201,164,69,0.25); border-radius: 12px; padding: 20px;
+    font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px; line-height: 1.65; color: #d8d8dc; white-space: pre-wrap;
+    max-height: 210px; overflow-y: auto;
+  }
+  .scenario-wrap { margin-top: 26px; }
+  .scenario-wrap textarea {
+    width: 100%; padding: 16px 18px; border-radius: 12px; background: #1a1a1d;
+    border: 1px solid var(--border); color: var(--text); font-size: 15px;
+    font-family: inherit; line-height: 1.6; resize: vertical; min-height: 110px;
+    outline: none; transition: border-color .2s;
+  }
+  .scenario-wrap textarea:focus { border-color: var(--gold); }
+  .char-count { font-size: 12px; color: var(--text-muted); margin-top: 6px; text-align: right; }
+  .char-count.over { color: #e0808c; }
+  .demo-actions { display: flex; gap: 12px; margin-top: 18px; align-items: center; flex-wrap: wrap; }
+  .demo-status { font-size: 13px; color: var(--text-muted); }
+
+  .response-area { margin-top: 26px; display: none; }
+  .response-area.visible { display: block; }
+  .response-label {
+    font-size: 12.5px; font-weight: 600; color: var(--wine-bright); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+  }
+  .badge { font-size: 11px; padding: 2px 10px; border-radius: 100px; background: rgba(114,47,59,0.35); color: #e0aab2; font-weight: 500; text-transform: none; letter-spacing: 0; }
+  .badge.live { background: rgba(40,200,64,0.15); color: #6fd98b; }
+  .response-box {
+    background: #1a1a1d; border: 1px solid var(--border); border-radius: 12px; padding: 22px;
+    font-size: 15px; line-height: 1.7; color: var(--text); min-height: 80px; white-space: pre-wrap;
+  }
+  .cursor-blink { display: inline-block; width: 8px; height: 18px; background: var(--gold); vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .demo-followup { margin-top: 26px; text-align: center; font-size: 15.5px; color: var(--text-muted); }
+  .demo-followup a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,164,69,0.4); }
+
+  /* ---------- Über mich ---------- */
+  .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 54px; align-items: center; margin-top: 20px; }
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 34px; } }
+  .about-portrait {
+    aspect-ratio: 1/1; border-radius: var(--radius);
+    background: linear-gradient(160deg, var(--bg-elevated), #1a1a1c 60%);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .portrait-placeholder {
+    width: 118px; height: 118px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--wine), var(--wine-bright));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; font-weight: 700; color: var(--gold-soft);
+  }
+  .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 16.5px; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- FAQ ---------- */
+  #faq { background: linear-gradient(180deg, var(--bg), #191919 55%, var(--bg)); }
+  .faq-list { margin-top: 40px; }
+  details {
+    border-bottom: 1px solid var(--border); padding: 4px 0;
+  }
+  details summary {
+    cursor: pointer; padding: 20px 34px 20px 0; font-size: 17px; font-weight: 500;
+    list-style: none; position: relative; transition: color .2s;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary:hover { color: var(--gold); }
+  details summary::after {
+    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    font-size: 22px; font-weight: 300; color: var(--gold); transition: transform .25s;
+  }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--text-muted); font-size: 15.5px; padding: 0 40px 22px 0; }
+
+  /* ---------- Kontakt ---------- */
+  #kontakt { background: linear-gradient(180deg, var(--bg), #191517); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; margin-top: 40px; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 38px; } }
+  .contact-info p { color: var(--text-muted); margin-bottom: 22px; font-size: 16px; }
+  .contact-detail { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; font-size: 15px; }
+  .contact-detail .ci { color: var(--gold); font-size: 17px; width: 22px; text-align: center; }
+  .contact-detail a { color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(201,164,69,0.4); }
+  .contact-detail a:hover { color: var(--gold); }
+  .booking-box {
+    margin-bottom: 28px; padding: 22px 24px; border-radius: 14px;
+    background: rgba(201,164,69,0.07); border: 1px solid rgba(201,164,69,0.28);
+  }
+  .booking-box h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .booking-box p { font-size: 14.5px; margin-bottom: 16px; }
+
+  form .field { margin-bottom: 16px; }
+  form label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 7px; font-weight: 500; }
+  form input, form textarea {
+    width: 100%; padding: 13px 16px; border-radius: 12px; background: var(--bg-card);
+    border: 1px solid var(--border); color: var(--text); font-size: 15px;
+    outline: none; font-family: inherit; transition: border-color .2s;
+  }
+  form input:focus, form textarea:focus { border-color: var(--gold); }
+  form textarea { resize: vertical; min-height: 110px; }
+  .form-note { font-size: 12.5px; color: var(--text-muted); margin-top: 12px; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 38px 24px; }
+  .footer-inner { max-width: 1024px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer p, footer a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+  .footer-links { display: flex; gap: 24px; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top">Mats <span>Denninger</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#angebot">Angebot</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#demo">Live-Demo</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="nav-cta" href="#kontakt">Erstgespräch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-eyebrow">KI-Automatisierung für Vertrieb &amp; Verwaltung</div>
+  <h1>Ihr Team tippt ab,<br><span class="accent">was längst von selbst laufen könnte.</span></h1>
+  <p>Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. Nach 14 Tagen wissen Sie, wie viele Stunden pro Woche drin sind — und der erste Prozess läuft bereits.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen — 30 Min., kostenlos</a>
+    <a class="btn btn-secondary" href="#demo">Erst die Demo testen</a>
+  </div>
+  <p class="hero-reassure">Kein Verkaufsgespräch. Sie bekommen im Erstgespräch eine ehrliche Einschätzung — auch wenn sie lautet, dass sich KI für Sie gerade nicht lohnt.</p>
+</header>
+
+<section id="problem">
+  <div class="container narrow">
+    <div class="section-label">Das Problem</div>
+    <h2>Kommt Ihnen das bekannt vor?</h2>
+    <ul class="pain-list">
+      <li class="reveal"><span class="mark">→</span> Anfragen aus E-Mails werden von Hand ins CRM übertragen — jeden Tag, von mehreren Leuten.</li>
+      <li class="reveal"><span class="mark">→</span> Angebote entstehen jedes Mal neu, obwohl sich achtzig Prozent davon wiederholen.</li>
+      <li class="reveal"><span class="mark">→</span> Niemand kann zuverlässig sagen, welche Anfrage gerade wo liegt.</li>
+      <li class="reveal"><span class="mark">→</span> Ihre erfahrensten Mitarbeiter verbringen den halben Tag mit Suchen, Kopieren und Nachtragen.</li>
+    </ul>
+    <p class="pain-conclusion reveal">Das sind keine Personalprobleme. Das sind Prozessprobleme — und ein großer Teil davon lässt sich heute automatisieren. <strong>Die Frage ist nur, welcher Teil sich zuerst lohnt.</strong></p>
+  </div>
+</section>
+
+<section id="angebot">
+  <div class="container">
+    <div class="section-label">Das Angebot</div>
+    <h2>Der Zeitgewinn-Check</h2>
+    <p class="section-intro">Ein klar umrissenes Projekt statt unbefristeter Beratung. Fester Umfang, fester Preis, festes Ende.</p>
+
+    <div class="offer-card reveal">
+      <div class="offer-head">
+        <div class="offer-name">Zeitgewinn-Check</div>
+        <div class="offer-tagline">14 Tage · Festpreis · Am Ende läuft ein Prozess bereits automatisch</div>
+      </div>
+      <div class="offer-body">
+        <ul class="deliverables">
+          <li>
+            <div class="deliv-num">1</div>
+            <div>
+              <h4>Prozess-Audit</h4>
+              <p>Ich spreche mit den Menschen, die die Arbeit tatsächlich machen — nicht nur mit der Geschäftsführung. Dabei wird sichtbar, wo die Zeit wirklich hingeht.</p>
+            </div>
+          </li>
+          <li>
+            <div class="deliv-num">2</div>
+            <div>
+              <h4>Priorisierte Potenzialliste</h4>
+              <p>Jeder gefundene Anwendungsfall mit geschätzter Zeitersparnis pro Woche, Umsetzungsaufwand und Risiko. Damit Sie selbst entscheiden können, was sich lohnt.</p>
+            </div>
+          </li>
+          <li>
+            <div class="deliv-num">3</div>
+            <div>
+              <h4>Ein Pilot, fertig umgesetzt</h4>
+              <p>Der Anwendungsfall mit dem besten Verhältnis aus Nutzen und Aufwand geht live. Nicht als Konzeptpapier, sondern lauffähig und von Ihrem Team bedienbar.</p>
+            </div>
+          </li>
+          <li>
+            <div class="deliv-num">4</div>
+            <div>
+              <h4>Umsetzungsplan für den Rest</h4>
+              <p>Was Sie selbst umsetzen können, was Sie extern vergeben sollten und in welcher Reihenfolge. Sie sind danach nicht auf mich angewiesen.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="offer-price-row">
+          <div>
+            <div class="price-main">2.900 €</div>
+            <div class="price-note">netto, Festpreis · keine Nachberechnung</div>
+          </div>
+          <div style="flex:1; min-width: 240px;">
+            <div class="price-note" style="margin-top:0;">Für Unternehmen ab etwa 10 Mitarbeitern. Reisekosten innerhalb Deutschlands sind enthalten.</div>
+          </div>
+        </div>
+
+        <div class="guarantee">
+          <p><strong>Meine Garantie:</strong> Finde ich in Ihren Prozessen keine realistische Einsparung von mindestens fünf Stunden pro Woche, zahlen Sie nichts. Die Potenzialliste behalten Sie trotzdem.</p>
+          <p>Das ist kein Marketing-Versprechen, sondern der einzige faire Umgang damit, dass Sie mich noch nicht kennen. Das Risiko liegt bei mir, nicht bei Ihnen.</p>
+        </div>
+
+        <div class="capacity"><span class="dot"></span> Ich nehme zwei Projekte pro Monat an, weil ich sie selbst durchführe.</div>
+
+        <div class="offer-actions">
+          <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen</a>
+          <a class="btn btn-secondary" href="#ablauf">Ablauf ansehen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf">
+  <div class="container">
+    <div class="section-label">Der Ablauf</div>
+    <h2>Was in den 14 Tagen passiert.</h2>
+    <p class="section-intro">Damit Sie wissen, worauf Sie sich einlassen — und wie viel Zeit es Ihr Team kostet.</p>
+    <div class="timeline">
+      <div class="step reveal">
+        <div class="step-day">Tag 1–2</div>
+        <h4>Zuhören</h4>
+        <p>Gespräche mit vier bis sechs Personen aus dem Tagesgeschäft, je 45 Minuten. Mehr Aufwand entsteht Ihrem Team nicht.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-day">Tag 3–5</div>
+        <h4>Analysieren</h4>
+        <p>Ich rechne durch, welcher Prozess wie viel Zeit frisst und was davon automatisierbar ist. Sie bekommen die Liste vorab.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-day">Tag 6–12</div>
+        <h4>Bauen</h4>
+        <p>Der ausgewählte Pilot wird umgesetzt und an Ihre bestehenden Systeme angebunden. Zwischenstand nach Tag 9.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-day">Tag 13–14</div>
+        <h4>Übergeben</h4>
+        <p>Einweisung Ihres Teams, Dokumentation und der Plan für die nächsten Schritte. Danach läuft es ohne mich.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="container">
+    <div class="section-label">Beweis statt Behauptung</div>
+    <h2>Sie müssen mir nicht glauben.</h2>
+    <p class="section-intro">Das hier ist einer der Prompts, mit denen ich arbeite. Beschreiben Sie eine Situation aus Ihrem Unternehmen und sehen Sie selbst, was dabei herauskommt. Ohne Anmeldung, ohne E-Mail-Adresse.</p>
+
+    <div class="demo-window reveal">
+      <div class="demo-titlebar">
+        <div class="traffic-light tl-red"></div>
+        <div class="traffic-light tl-yellow"></div>
+        <div class="traffic-light tl-green"></div>
+        <div class="demo-title">Prozessanalyse — Live</div>
+      </div>
+      <div class="demo-body">
+        <div class="prompt-label"><span>Der Prompt</span></div>
+        <div class="prompt-box" id="megaPrompt">Du bist ein erfahrener Unternehmensberater mit Schwerpunkt Prozessoptimierung im Mittelstand.
+
+Analysiere das folgende Szenario in genau dieser Struktur:
+
+1. KERNPROBLEM — Identifiziere das eigentliche Problem hinter dem beschriebenen Symptom (max. 2 Sätze).
+2. QUICK WINS — Nenne 3 Maßnahmen, die innerhalb von 30 Tagen ohne Budget umsetzbar sind.
+3. KI-HEBEL — Zeige konkret, wo künstliche Intelligenz den größten Effekt hätte, inkl. geschätzter Zeitersparnis pro Woche.
+4. RISIKO — Nenne das größte Risiko bei Nichtstun.
+
+Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
+
+        <div class="scenario-wrap">
+          <div class="prompt-label"><span>Ihre Situation</span></div>
+          <textarea id="scenarioInput" maxlength="800" placeholder="Beschreiben Sie eine Situation aus Ihrem Unternehmen …">Ein Vertriebsteam mit 8 Mitarbeitern verbringt täglich ca. 2 Stunden pro Person mit dem manuellen Erfassen von Kundenanfragen aus E-Mails in das CRM-System. Fehler bei der Übertragung führen regelmäßig zu verlorenen Leads.</textarea>
+          <div class="char-count" id="charCount">0 / 800</div>
+        </div>
+
+        <div class="demo-actions">
+          <button class="btn btn-primary btn-small" id="runBtn">Analyse starten</button>
+          <span class="demo-status" id="demoStatus"></span>
+        </div>
+
+        <div class="response-area" id="responseArea">
+          <div class="response-label">Ergebnis <span class="badge" id="modeBadge">Beispiel</span></div>
+          <div class="response-box" id="responseBox"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="demo-followup reveal">Das ist eine Analyse in dreißig Sekunden auf Basis von vier Sätzen. Im Zeitgewinn-Check bekommen Sie dieselbe Denkweise auf Basis Ihrer echten Prozesse — <a href="#kontakt">und den ersten Fall fertig umgesetzt</a>.</p>
+  </div>
+</section>
+
+<section id="ueber-mich">
+  <div class="container narrow">
+    <div class="section-label">Über mich</div>
+    <h2>Wer hier eigentlich schreibt.</h2>
+    <div class="about-grid">
+      <div class="about-portrait reveal">
+        <div class="portrait-placeholder">MD</div>
+      </div>
+      <div class="about-text reveal">
+        <p>Mein Name ist <strong>Mats Denninger</strong>. Ich automatisiere Prozesse in Vertrieb und Verwaltung mit KI — und zwar die, die Ihre Leute jeden Tag Zeit kosten.</p>
+        <p>Ich bin offen damit: <strong>Ich baue mein Portfolio gerade auf.</strong> Sie finden hier keine Wand mit Kundenlogos, weil ich keine erfunden habe. Was Sie stattdessen bekommen: meine volle Aufmerksamkeit statt eines Juniors, einen Einstiegspreis, den es in dieser Form später nicht mehr geben wird, und eine Garantie, die das Risiko auf meine Seite legt.</p>
+        <p>Wenn Ihnen das zu wenig ist, verstehe ich das. Wenn Sie stattdessen jemanden wollen, der sich wirklich in Ihre Abläufe hineinkniet — dann lassen Sie uns reden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container narrow">
+    <div class="section-label">Häufige Fragen</div>
+    <h2>Was Sie vermutlich noch wissen wollen.</h2>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>Warum sollte ich mit jemandem arbeiten, der keine Referenzen zeigt?</summary>
+        <p>Weil ich das Risiko dafür übernehme. Finde ich keine fünf Stunden Einsparung pro Woche, zahlen Sie nichts — und behalten trotzdem die Analyse. Wer bereits fünfzig Projekte gemacht hat, muss Ihnen dieses Angebot nicht machen. Ich schon. Das ist der Deal, und er ist zu Ihren Gunsten.</p>
+      </details>
+      <details class="reveal">
+        <summary>Wir haben keine IT-Abteilung. Ist das ein Problem?</summary>
+        <p>Nein, das ist eher der Normalfall. Der Pilot wird so gebaut, dass ihn Ihre Mitarbeiter bedienen können, ohne etwas programmieren zu müssen. In der Übergabe am Ende zeige ich genau, wie er läuft und was zu tun ist, wenn er einmal klemmt.</p>
+      </details>
+      <details class="reveal">
+        <summary>Was passiert mit unseren Daten? Wir haben Kundendaten im System.</summary>
+        <p>Wir klären vor Projektbeginn schriftlich, welche Daten überhaupt angefasst werden. Wo es geht, arbeite ich mit anonymisierten Daten oder Testdatensätzen. Für die Umsetzung kommen Anbieter mit Serverstandort in der EU und Auftragsverarbeitungsvertrag zum Einsatz. Wenn Ihre Daten besonders sensibel sind, sagen Sie es im Erstgespräch — dann prüfen wir zuerst, ob eine lokale Lösung nötig ist.</p>
+      </details>
+      <details class="reveal">
+        <summary>Wir nutzen schon Tools. Fangen wir bei null an?</summary>
+        <p>Im Gegenteil. Bestehende Systeme sind ein Vorteil, weil die Daten dann schon irgendwo liegen. Der Pilot wird an das angebunden, was Sie haben — kein Systemwechsel, keine Migration. Falls sich in der Analyse zeigt, dass ein Tool wirklich im Weg steht, sage ich Ihnen das offen.</p>
+      </details>
+      <details class="reveal">
+        <summary>Was kostet die Umsetzung nach dem Check?</summary>
+        <p>Das hängt davon ab, was in der Analyse herauskommt, und Sie sind zu nichts verpflichtet. Der Umsetzungsplan ist bewusst so geschrieben, dass Sie ihn auch jemand anderem geben oder selbst abarbeiten können. Wenn Sie mit mir weitermachen wollen, kalkuliere ich jeden weiteren Anwendungsfall einzeln zum Festpreis.</p>
+      </details>
+      <details class="reveal">
+        <summary>Wie viel Zeit kostet uns das?</summary>
+        <p>Vier bis sechs Gespräche à 45 Minuten in den ersten beiden Tagen, danach ein Zwischentermin und die Übergabe. Zusammen etwa sechs bis acht Stunden verteilt über zwei Wochen. Alles andere passiert auf meiner Seite.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="container">
+    <div class="section-label">Kontakt</div>
+    <h2>Lassen Sie uns dreißig Minuten sprechen.</h2>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="booking-box">
+          <h4>Was im Erstgespräch passiert</h4>
+          <p>Sie schildern, wo bei Ihnen Zeit verloren geht. Ich sage Ihnen ehrlich, ob sich das automatisieren lässt und ob sich der Zeitgewinn-Check für Sie rechnet. Falls nicht, sage ich das auch — dann haben wir beide dreißig Minuten gut investiert.</p>
+          <a class="btn btn-primary btn-small" id="bookingBtn" href="#contactForm">Termin vorschlagen</a>
+        </div>
+        <div class="contact-detail"><span class="ci">✉</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
+        <div class="contact-detail"><span class="ci">📍</span> Deutschland · Remote und vor Ort</div>
+        <div class="contact-detail"><span class="ci">⏱</span> Antwort innerhalb von 24 Stunden</div>
+      </div>
+      <form id="contactForm" class="reveal">
+        <div class="field">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" required placeholder="Max Mustermann">
+        </div>
+        <div class="field">
+          <label for="cCompany">Unternehmen</label>
+          <input type="text" id="cCompany" placeholder="Mustermann GmbH">
+        </div>
+        <div class="field">
+          <label for="cEmail">E-Mail</label>
+          <input type="email" id="cEmail" required placeholder="max@mustermann.de">
+        </div>
+        <div class="field">
+          <label for="cMsg">Wo geht bei Ihnen Zeit verloren?</label>
+          <textarea id="cMsg" required placeholder="Ein, zwei Sätze genügen."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Erstgespräch anfragen</button>
+        <p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit der vorausgefüllten Nachricht. Kein Newsletter, keine Weitergabe Ihrer Daten.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 Mats Denninger — KI-Automatisierung</p>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===========================================================================
+//  KONFIGURATION
+//  WORKER_URL  : Adresse des Claude-Proxys (siehe worker/README.md).
+//                Leer = die Demo zeigt die vorbereitete Beispiel-Antwort.
+//  BOOKING_URL : Kalender-Link (Cal.com, Calendly o.ä.). Leer = das Formular
+//                wird stattdessen angesprungen.
+// ===========================================================================
+const WORKER_URL  = "";
+const BOOKING_URL = "";
+
+// ---------- Scroll-Reveal ----------
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ---------- Terminbuchung ----------
+if (BOOKING_URL) {
+  const b = document.getElementById('bookingBtn');
+  b.href = BOOKING_URL;
+  b.target = '_blank';
+  b.rel = 'noopener';
+  b.textContent = 'Termin direkt buchen';
+}
+
+// ---------- Kontaktformular (mailto) ----------
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('cName').value;
+  const company = document.getElementById('cCompany').value;
+  const email = document.getElementById('cEmail').value;
+  const msg = document.getElementById('cMsg').value;
+  const subject = encodeURIComponent(`Erstgespräch Zeitgewinn-Check — ${name}${company ? ' (' + company + ')' : ''}`);
+  const body = encodeURIComponent(`Name: ${name}\nUnternehmen: ${company || '—'}\nE-Mail: ${email}\n\nWo Zeit verloren geht:\n${msg}`);
+  window.location.href = `mailto:matsdenninger@gmail.com?subject=${subject}&body=${body}`;
+});
+
+// ---------- Demo ----------
+const runBtn = document.getElementById('runBtn');
+const scenarioInput = document.getElementById('scenarioInput');
+const charCount = document.getElementById('charCount');
+const responseArea = document.getElementById('responseArea');
+const responseBox = document.getElementById('responseBox');
+const modeBadge = document.getElementById('modeBadge');
+const demoStatus = document.getElementById('demoStatus');
+
+const EXAMPLE_RESPONSE = `1. KERNPROBLEM
+Das Team verliert nicht Zeit durch zu viele Anfragen, sondern durch einen fehlenden strukturierten Übergabeprozess zwischen Posteingang und CRM. Die manuelle Doppelerfassung ist das Symptom, die fehlende Systemintegration die Ursache.
+
+2. QUICK WINS
+• E-Mail-Vorlagen mit Pflichtfeldern für Kunden einführen, damit Anfragen bereits strukturiert eingehen.
+• Feste CRM-Erfassungszeiten (zweimal täglich gebündelt) statt permanenter Unterbrechungen.
+• Vier-Augen-Check bei Leads über einer definierten Umsatzschwelle, um Übertragungsfehler abzufangen.
+
+3. KI-HEBEL
+Ein Sprachmodell kann eingehende E-Mails automatisch auslesen, die relevanten Felder (Name, Firma, Anliegen, Dringlichkeit) extrahieren und strukturiert ans CRM übergeben. Der Mitarbeiter prüft nur noch, statt abzutippen.
+Geschätzte Ersparnis: rund 1,5 Stunden pro Person und Tag, bei 8 Mitarbeitern etwa 60 Stunden pro Woche.
+
+4. RISIKO
+Bei Nichtstun gehen weiterhin Leads durch Übertragungsfehler verloren. Bereits zwei verlorene Abschlüsse pro Monat übersteigen die Kosten einer Automatisierung deutlich. Hinzu kommt die Belastung des Teams durch Arbeit, die niemand freiwillig macht.`;
+
+function typeText(text, el, speed = 8) {
+  return new Promise((resolve) => {
+    el.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor-blink';
+    el.appendChild(cursor);
+    let i = 0;
+    const timer = setInterval(() => {
+      i += 3;
+      el.textContent = text.slice(0, i);
+      el.appendChild(cursor);
+      if (i >= text.length) { clearInterval(timer); cursor.remove(); resolve(); }
+    }, speed);
+  });
+}
+
+async function runLive(scenario) {
+  responseBox.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor-blink';
+  responseBox.appendChild(cursor);
+
+  const res = await fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ scenario })
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `Fehler ${res.status}`);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '', fullText = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      try {
+        const event = JSON.parse(line.slice(6));
+        if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+          fullText += event.delta.text;
+          responseBox.textContent = fullText;
+          responseBox.appendChild(cursor);
+        }
+      } catch (_) { /* unvollständige Zeile ignorieren */ }
+    }
+  }
+  cursor.remove();
+}
+
+function updateCharCount() {
+  const len = scenarioInput.value.length;
+  charCount.textContent = `${len} / 800`;
+  charCount.classList.toggle('over', len > 780);
+}
+scenarioInput.addEventListener('input', updateCharCount);
+updateCharCount();
+
+runBtn.addEventListener('click', async () => {
+  const scenario = scenarioInput.value.trim();
+
+  if (WORKER_URL && scenario.length < 20) {
+    demoStatus.textContent = 'Bitte beschreiben Sie die Situation etwas ausführlicher.';
+    return;
+  }
+
+  runBtn.disabled = true;
+  responseArea.classList.add('visible');
+
+  try {
+    if (WORKER_URL) {
+      modeBadge.textContent = 'Live';
+      modeBadge.classList.add('live');
+      demoStatus.textContent = 'Analyse läuft …';
+      await runLive(scenario);
+    } else {
+      modeBadge.textContent = 'Beispiel-Antwort';
+      modeBadge.classList.remove('live');
+      await typeText(EXAMPLE_RESPONSE, responseBox);
+    }
+    demoStatus.textContent = '';
+  } catch (err) {
+    modeBadge.textContent = 'Hinweis';
+    modeBadge.classList.remove('live');
+    responseBox.textContent = err.message;
+    demoStatus.textContent = '';
+  } finally {
+    runBtn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
