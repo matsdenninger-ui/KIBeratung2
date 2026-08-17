@@ -5,6 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mats Denninger — KI-Automatisierung für Vertrieb &amp; Verwaltung</title>
 <meta name="description" content="Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. 14 Tage, Festpreis, ein Prozess läuft am Ende bereits.">
+<meta name="theme-color" content="#1d1d1f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='%23c9a445' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
+
+<!-- Vorschau beim Teilen (LinkedIn, WhatsApp, Slack).
+     og:image fehlt bewusst — dafuer braucht es ein echtes Bild, siehe README. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Mats Denninger">
+<meta property="og:title" content="Ihr Team tippt ab, was längst von selbst laufen könnte.">
+<meta property="og:description" content="Zeitgewinn-Check: 14 Tage, 2.900 € Festpreis. Am Ende läuft ein Prozess bereits automatisch — oder Sie zahlen nichts.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ihr Team tippt ab, was längst von selbst laufen könnte.">
+<meta name="twitter:description" content="Zeitgewinn-Check: 14 Tage, 2.900 € Festpreis. Am Ende läuft ein Prozess bereits automatisch — oder Sie zahlen nichts.">
+
+<!-- Strukturierte Daten: hilft Suchmaschinen und KI-Assistenten, Angebot und
+     Antworten korrekt wiederzugeben. Inhalte gespiegelt aus der Seite. -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Mats Denninger — KI-Automatisierung",
+    "description": "Prozessautomatisierung mit KI für Vertrieb und Verwaltung im Mittelstand.",
+    "email": "matsdenninger@gmail.com",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Deutschland"
+    },
+    "priceRange": "€€",
+    "founder": {
+      "@type": "Person",
+      "name": "Mats Denninger"
+    },
+    "makesOffer": {
+      "@type": "Offer",
+      "name": "Zeitgewinn-Check",
+      "description": "Prozess-Audit, priorisierte Potenzialliste, ein fertig umgesetzter Pilot und ein Umsetzungsplan — in 14 Tagen.",
+      "price": "2900",
+      "priceCurrency": "EUR",
+      "availability": "https://schema.org/LimitedAvailability"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Warum sollte ich mit jemandem arbeiten, der keine Referenzen zeigt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weil ich das Risiko dafür übernehme. Finde ich keine fünf Stunden Einsparung pro Woche, zahlen Sie nichts — und behalten trotzdem die Analyse."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wir haben keine IT-Abteilung. Ist das ein Problem?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein, das ist eher der Normalfall. Der Pilot wird so gebaut, dass ihn Ihre Mitarbeiter bedienen können, ohne etwas programmieren zu müssen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was passiert mit unseren Daten? Wir haben Kundendaten im System.",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wir klären vor Projektbeginn schriftlich, welche Daten angefasst werden. Wo es geht, arbeite ich mit anonymisierten Daten. Für die Umsetzung kommen Anbieter mit Serverstandort in der EU und Auftragsverarbeitungsvertrag zum Einsatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wir nutzen schon Tools. Fangen wir bei null an?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Im Gegenteil. Bestehende Systeme sind ein Vorteil. Der Pilot wird an das angebunden, was Sie haben — kein Systemwechsel, keine Migration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was kostet die Umsetzung nach dem Check?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Das hängt davon ab, was in der Analyse herauskommt, und Sie sind zu nichts verpflichtet. Jeder weitere Anwendungsfall wird einzeln zum Festpreis kalkuliert."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie viel Zeit kostet uns das?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vier bis sechs Gespräche à 45 Minuten in den ersten beiden Tagen, danach ein Zwischentermin und die Übergabe. Zusammen etwa sechs bis acht Stunden über zwei Wochen."
+        }
+      }
+    ]
+  }
+]
+</script>
 <style>
   :root {
     --bg: #1d1d1f;
@@ -50,7 +148,27 @@
     font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s;
   }
   .nav-cta:hover { background: var(--gold-soft); }
-  @media (max-width: 720px) { .nav-links { display: none; } }
+  .nav-toggle {
+    display: none; background: transparent; border: 1px solid rgba(255,255,255,0.22);
+    color: var(--text); border-radius: 9px; padding: 7px 10px 4px; cursor: pointer;
+    font-family: inherit; transition: border-color .2s;
+  }
+  .nav-toggle:hover { border-color: var(--gold); }
+  .nav-toggle svg { fill: currentColor; }
+  @media (max-width: 720px) {
+    .nav-toggle { display: inline-block; }
+    /* Deckend, nicht transparent: eine zweite backdrop-filter innerhalb der
+       bereits gefilterten Navigation laesst den Seiteninhalt durchscheinen. */
+    .nav-links {
+      display: none; position: absolute; top: 52px; left: 0; right: 0;
+      flex-direction: column; gap: 0; padding: 6px 24px 14px;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { display: block; padding: 13px 0; font-size: 15px; border-bottom: 1px solid var(--border); }
+    .nav-links li:last-child a { border-bottom: none; }
+  }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -83,7 +201,22 @@
     color: var(--text-muted); max-width: 660px;
   }
   .hero-cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-  .hero-reassure { margin-top: 20px; font-size: 13.5px; color: var(--text-muted); opacity: .85; }
+  .hero-facts {
+    list-style: none; margin-top: 30px; display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px 28px; font-size: 14.5px; color: var(--text-muted);
+  }
+  .hero-facts li { display: flex; align-items: baseline; gap: 7px; }
+  .hero-facts li + li { position: relative; }
+  .hero-facts li + li::before {
+    content: ""; position: absolute; left: -15px; top: 4px; bottom: 4px;
+    width: 1px; background: var(--border);
+  }
+  .hero-facts strong { color: var(--text); font-weight: 600; }
+  @media (max-width: 620px) {
+    .hero-facts { flex-direction: column; align-items: center; gap: 8px; }
+    .hero-facts li + li::before { display: none; }
+  }
+  .hero-reassure { margin-top: 22px; font-size: 13.5px; color: var(--text-muted); opacity: .85; }
 
   .btn {
     display: inline-block; padding: 14px 30px; border-radius: 980px;
@@ -294,7 +427,21 @@
   }
   form input:focus, form textarea:focus { border-color: var(--gold); }
   form textarea { resize: vertical; min-height: 110px; }
+  .optional { font-weight: 400; color: var(--text-muted); opacity: .75; }
   .form-note { font-size: 12.5px; color: var(--text-muted); margin-top: 12px; }
+  .form-status {
+    margin-top: 16px; padding: 16px 18px; border-radius: 14px;
+    background: rgba(201,164,69,0.08); border: 1px solid rgba(201,164,69,0.3);
+    font-size: 14.5px; line-height: 1.55;
+  }
+  .form-status a { color: var(--gold); }
+  .form-status .copy-btn {
+    margin-top: 12px; background: transparent; color: var(--text);
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 980px;
+    padding: 8px 16px; font-size: 13.5px; font-family: inherit; cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+  .form-status .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
 
   /* ---------- Footer ---------- */
   footer { border-top: 1px solid var(--border); padding: 38px 24px; }
@@ -303,26 +450,63 @@
   footer a:hover { color: var(--gold); }
   .footer-links { display: flex; gap: 24px; }
 
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* Anker nicht hinter der fixen Navigation parken */
+  header[id], section[id] { scroll-margin-top: 68px; }
+
+  /* Tastaturbedienung sichtbar machen */
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 200;
+    background: var(--gold); color: #1a1a1c; padding: 11px 20px;
+    font-size: 14px; font-weight: 500; text-decoration: none; border-radius: 0 0 10px 0;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Umbrueche: ausgewogene Ueberschriften, saubere Trennung langer deutscher Woerter */
+  h1, h2, h3, h4, .offer-name { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  @media (max-width: 640px) { p, li, h1, h2 { hyphens: auto; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+<nav aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a class="nav-logo" href="#top">Mats <span>Denninger</span></a>
     <div class="nav-right">
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#angebot">Angebot</a></li>
         <li><a href="#ablauf">Ablauf</a></li>
         <li><a href="#demo">Live-Demo</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <a class="nav-cta" href="#kontakt">Erstgespräch</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Navigation öffnen">
+        <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
+          <rect y="0" width="18" height="2" rx="1"/><rect y="6" width="18" height="2" rx="1"/><rect y="12" width="18" height="2" rx="1"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
+
+<main id="inhalt">
 
 <header class="hero" id="top">
   <div class="hero-eyebrow">KI-Automatisierung für Vertrieb &amp; Verwaltung</div>
@@ -332,6 +516,11 @@
     <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen — 30 Min., kostenlos</a>
     <a class="btn btn-secondary" href="#demo">Erst die Demo testen</a>
   </div>
+  <ul class="hero-facts">
+    <li><strong>2.900 €</strong> Festpreis, keine Nachberechnung</li>
+    <li><strong>14 Tage</strong> bis der erste Prozess läuft</li>
+    <li><strong>Keine Ersparnis, keine Rechnung</strong></li>
+  </ul>
   <p class="hero-reassure">Kein Verkaufsgespräch. Sie bekommen im Erstgespräch eine ehrliche Einschätzung — auch wenn sie lautet, dass sich KI für Sie gerade nicht lohnt.</p>
 </header>
 
@@ -564,26 +753,29 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
       <form id="contactForm" class="reveal">
         <div class="field">
           <label for="cName">Name</label>
-          <input type="text" id="cName" required placeholder="Max Mustermann">
+          <input type="text" id="cName" name="name" autocomplete="name" required placeholder="Max Mustermann">
         </div>
         <div class="field">
-          <label for="cCompany">Unternehmen</label>
-          <input type="text" id="cCompany" placeholder="Mustermann GmbH">
+          <label for="cCompany">Unternehmen <span class="optional">optional</span></label>
+          <input type="text" id="cCompany" name="organization" autocomplete="organization" placeholder="Mustermann GmbH">
         </div>
         <div class="field">
           <label for="cEmail">E-Mail</label>
-          <input type="email" id="cEmail" required placeholder="max@mustermann.de">
+          <input type="email" id="cEmail" name="email" autocomplete="email" required placeholder="max@mustermann.de">
         </div>
         <div class="field">
           <label for="cMsg">Wo geht bei Ihnen Zeit verloren?</label>
-          <textarea id="cMsg" required placeholder="Ein, zwei Sätze genügen."></textarea>
+          <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Erstgespräch anfragen</button>
-        <p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit der vorausgefüllten Nachricht. Kein Newsletter, keine Weitergabe Ihrer Daten.</p>
+        <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
+        <div class="form-status" id="formStatus" role="status" hidden></div>
       </form>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="footer-inner">
@@ -622,16 +814,59 @@ if (BOOKING_URL) {
 }
 
 // ---------- Kontaktformular (mailto) ----------
+// Nicht jeder Besucher hat ein Mailprogramm eingerichtet — bei Webmail passiert
+// nach dem Klick oft sichtbar nichts. Deshalb bleibt die Nachricht stehen.
+const MAIL_TO = 'matsdenninger@gmail.com';
+const formStatus = document.getElementById('formStatus');
+
 document.getElementById('contactForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  const name = document.getElementById('cName').value;
-  const company = document.getElementById('cCompany').value;
-  const email = document.getElementById('cEmail').value;
-  const msg = document.getElementById('cMsg').value;
-  const subject = encodeURIComponent(`Erstgespräch Zeitgewinn-Check — ${name}${company ? ' (' + company + ')' : ''}`);
-  const body = encodeURIComponent(`Name: ${name}\nUnternehmen: ${company || '—'}\nE-Mail: ${email}\n\nWo Zeit verloren geht:\n${msg}`);
-  window.location.href = `mailto:matsdenninger@gmail.com?subject=${subject}&body=${body}`;
+  const name = document.getElementById('cName').value.trim();
+  const company = document.getElementById('cCompany').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const msg = document.getElementById('cMsg').value.trim();
+
+  const subjectText = `Erstgespräch Zeitgewinn-Check — ${name}${company ? ' (' + company + ')' : ''}`;
+  const bodyText = `Name: ${name}\nUnternehmen: ${company || '—'}\nE-Mail: ${email}\n\nWo Zeit verloren geht:\n${msg}`;
+
+  window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(bodyText)}`;
+
+  formStatus.hidden = false;
+  formStatus.innerHTML = `
+    <strong>Ihr E-Mail-Programm sollte sich jetzt öffnen.</strong>
+    Falls nichts passiert, schreiben Sie mir direkt an
+    <a href="mailto:${MAIL_TO}">${MAIL_TO}</a> — hier ist Ihre Nachricht zum Kopieren.
+    <br><button type="button" class="copy-btn">Nachricht kopieren</button>`;
+
+  const copyBtn = formStatus.querySelector('.copy-btn');
+  copyBtn.addEventListener('click', async () => {
+    const full = `${subjectText}\n\n${bodyText}`;
+    try {
+      await navigator.clipboard.writeText(full);
+      copyBtn.textContent = 'Kopiert';
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = full; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'width:100%;margin-top:12px;min-height:150px;';
+      copyBtn.replaceWith(ta); ta.select();
+    }
+  });
+
+  formStatus.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 });
+
+// ---------- Mobile Navigation ----------
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+function setNav(open) {
+  navLinks.classList.toggle('open', open);
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Navigation schließen' : 'Navigation öffnen');
+}
+navToggle.addEventListener('click', () => setNav(!navLinks.classList.contains('open')));
+navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') setNav(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
 
 // ---------- Demo ----------
 const runBtn = document.getElementById('runBtn');
@@ -657,8 +892,11 @@ Geschätzte Ersparnis: rund 1,5 Stunden pro Person und Tag, bei 8 Mitarbeitern e
 4. RISIKO
 Bei Nichtstun gehen weiterhin Leads durch Übertragungsfehler verloren. Bereits zwei verlorene Abschlüsse pro Monat übersteigen die Kosten einer Automatisierung deutlich. Hinzu kommt die Belastung des Teams durch Arbeit, die niemand freiwillig macht.`;
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function typeText(text, el, speed = 8) {
   return new Promise((resolve) => {
+    if (reducedMotion) { el.textContent = text; resolve(); return; }
     el.textContent = '';
     const cursor = document.createElement('span');
     cursor.className = 'cursor-blink';
