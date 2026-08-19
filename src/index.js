@@ -123,15 +123,23 @@ function json(obj, status, cors) {
   });
 }
 
+/** SHA-256-Hex eines Strings. Macht aus der Besucher-IP ein Pseudonym. */
+async function sha256(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 /** Gibt eine Fehlermeldung zurueck, wenn ein Limit erreicht ist — sonst null. */
 async function checkLimits(request, env) {
   if (!env.RATE_LIMIT) return null; // KV nicht gebunden -> Limits deaktiviert
 
-  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const now = Date.now();
 
-  // Limit pro Besucher
-  const ipKey = `ip:${ip}`;
+  // Limit pro Besucher. Die IP wird nur als SHA-256-Hash abgelegt, nie im
+  // Klartext — fuer das Zaehlen reicht ein Pseudonym, und damit liegt keine
+  // Klartext-IP im Speicher, die spaeter jemand auslesen koennte.
+  const ipKey = `ip:${await sha256(request.headers.get('CF-Connecting-IP') || 'unknown')}`;
   const stored = await env.RATE_LIMIT.get(ipKey, { type: 'json' });
   const window = stored && stored.reset > now
     ? stored

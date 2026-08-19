@@ -6,6 +6,8 @@ Live-Demo mit Claude versorgt.
 | Datei | Zweck |
 |---|---|
 | `index.html` | Die komplette Landingpage inkl. Demo-Widget |
+| `impressum.html` | Anbieterkennzeichnung nach Paragraf 5 DDG |
+| `datenschutz.html` | Datenschutzerklaerung, beschreibt die echten Datenfluesse |
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
 | `wrangler.toml` | Worker-Konfiguration |
 
@@ -43,24 +45,49 @@ Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
   wissen wollen, ob sie zur Zielgruppe gehören.
 - **Formularfelder** mit `autocomplete`, optionales Feld als solches markiert.
 
+## Angaben auf der Seite
+
+Diese Zahlen und Zusagen sind von Mats bestaetigt und stehen so auf der Seite.
+Wer sie aendert, muss alle Stellen anfassen — sie tauchen mehrfach auf, auch in
+den strukturierten Daten (JSON-LD) und den Meta-Tags.
+
+| Angabe | Wert |
+|---|---|
+| Preis | 2.900 EUR netto, Festpreis |
+| Dauer | vier Wochen bis der erste Prozess laeuft |
+| Ablauf | 3 Tage Gespraeche, 3 Tage Analyse, 2 Wochen Bauen, dann Uebergabe |
+| Garantie | keine 5 Std./Woche Einsparung gefunden -> keine Rechnung |
+| Kapazitaet | zwei Projekte pro Monat |
+| Arbeitsweise | remote und per Videocall, vor Ort nur im Raum Duesseldorf |
+| Zielgruppe | Mittelstand ab ca. 10 Mitarbeitern: Vertrieb, Verwaltung, Handwerk |
+| Reaktionszeit | Antwort innerhalb von 24 Stunden |
+| Anschrift | Amselstrasse 48, 40627 Duesseldorf |
+
 ## Noch offen
 
-Diese Punkte brauchen eine Entscheidung oder Inhalte, die nur du hast:
+Diese Punkte brauchen eine Entscheidung oder Inhalte, die nur Mats hat:
 
-1. **Echtes Formular-Backend** statt `mailto:` (Formspree, Web3Forms, Vercel
-   Forms). Das ist der größte verbleibende Hebel — `mailto:` verliert Anfragen,
-   egal wie gut der Fallback ist.
-2. **Impressum und Datenschutz** verlinken auf `#`. Für eine gewerbliche Seite
-   in Deutschland ist das nicht optional.
-3. **Porträtfoto.** Der Platzhalter mit den Initialen ist bei einem
-   Einzelberater das schwächste Element der Seite — ein echtes Foto ist das
-   stärkste Vertrauenssignal, das du hast.
-4. **`og:image`** braucht ein echtes Bild.
-5. **Kanonische URL** (`<link rel="canonical">`), sobald die endgültige Domain
-   feststeht.
+1. **Gewerbeanmeldung.** Die Seite bewirbt eine entgeltliche Dienstleistung.
+   Das ist ein Gewerbe und muss beim Ordnungsamt angemeldet sein, bevor die
+   Seite oeffentlich erreichbar ist.
+2. **Nebentaetigkeit waehrend der Ausbildung.** Der Ausbildungsvertrag regelt
+   in der Regel, ob und in welchem Umfang eine selbstaendige Nebentaetigkeit
+   zulaessig ist. Vor dem Start klaeren.
+3. **Hosting im Datenschutz pruefen.** In `datenschutz.html` steht Vercel als
+   Hoster. Falls die Seite woanders liegt, muss der Abschnitt angepasst werden.
+4. **Auftragsverarbeitungsvertrag mit Anthropic** abschliessen, solange die
+   Live-Demo online ist. Die Demo sendet Besuchereingaben dorthin.
+5. **Umsatzsteuer.** Bei Kleinunternehmerregelung (Paragraf 19 UStG) gehoert
+   ein Hinweis auf die Rechnungen. Sonst die USt-IdNr ins Impressum.
+6. **Echtes Formular-Backend** statt `mailto:` (Formspree, Web3Forms, Vercel
+   Forms). Groesster verbleibender Hebel — `mailto:` verliert Anfragen.
+7. **Portraetfoto.** Der Platzhalter mit den Initialen ist bei einem
+   Einzelberater das schwaechste Element der Seite.
+8. **`og:image`** braucht ein echtes Bild.
+9. **Kanonische URL** (`<link rel="canonical">`), sobald die Domain feststeht.
 
-Bewusst nicht ergänzt: Referenzen und Testimonials. Du hast keine, und
-erfundene wären das Gegenteil dessen, was die Seite verspricht.
+Bewusst nicht ergaenzt: Referenzen und Testimonials. Es gibt keine, und
+erfundene waeren das Gegenteil dessen, was die Seite verspricht.
 
 ### Hinweis zu Schriftarten
 
