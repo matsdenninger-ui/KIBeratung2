@@ -111,6 +111,7 @@
   .nav-cta {
     position: relative; overflow: hidden; display: inline-block;
     background: rgba(201,164,69,0.55); color: #f5f0e2; padding: 7px 18px; border-radius: 999px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     font-size: 13px; font-weight: 500; text-decoration: none;
     transition: background .2s, transform .2s var(--ease-out);
   }
@@ -171,7 +172,7 @@
     transform: skewX(-18deg);
   }
   .btn:hover::after { animation: shine .9s var(--ease-out); }
-  .btn.pill { border-radius: 999px; padding-left: 34px; padding-right: 34px; }
+  .btn.pill { border-radius: 999px; padding-left: 34px; padding-right: 34px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   .btn-primary { background: rgba(201,164,69,0.55); color: #f5f0e2; }
   .btn-primary:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
@@ -336,7 +337,7 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a class="nav-cta" href="#kontakt" data-glass-bg="999">Kontakt aufnehmen</a>
+      <a class="nav-cta" href="#kontakt">Kontakt aufnehmen</a>
     </div>
   </div>
 </nav>
@@ -443,7 +444,7 @@
         <div class="booking-box">
           <h4>Was im Gespräch passiert</h4>
           <p>Sie schildern kurz, worum es geht. Ich sage Ihnen ehrlich, welches Angebot passt — oder ob sich aktuell keines davon lohnt. Falls nicht, sage ich das auch.</p>
-          <a class="btn btn-primary btn-small pill" href="#contactForm" data-glass-bg="999">Termin vorschlagen</a>
+          <a class="btn btn-primary btn-small pill" href="#contactForm">Termin vorschlagen</a>
         </div>
         <div class="contact-detail"><span class="ci">E-Mail</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
         <div class="contact-detail"><span class="ci">Adresse</span> Amselstraße 48, 40627 Düsseldorf</div>
@@ -467,7 +468,7 @@
           <label for="cMsg">Worum geht es?</label>
           <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary pill" data-glass-bg="999">Anfrage senden</button>
+        <button type="submit" class="btn btn-primary pill">Anfrage senden</button>
         <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
         <div class="form-status" id="formStatus" role="status" hidden></div>
       </form>
