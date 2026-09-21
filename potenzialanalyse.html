@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/liquid-glass/glass.css">
 
 <!-- Strukturierte Daten: hilft Suchmaschinen und KI-Assistenten, Angebot und
      Antworten korrekt wiederzugeben. Inhalte gespiegelt aus der Seite. -->
@@ -200,8 +201,8 @@
   .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
-    position: relative; overflow: hidden;
-    background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 8px;
+    position: relative; overflow: hidden; display: inline-block;
+    background: rgba(201,164,69,0.55); color: #f5f0e2; padding: 7px 16px; border-radius: 8px;
     font-size: 13px; font-weight: 500; text-decoration: none;
     transition: background .2s, transform .2s var(--ease-out);
   }
@@ -210,7 +211,7 @@
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg);
   }
-  .nav-cta:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .nav-cta:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
   .nav-cta:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle {
     position: relative; overflow: hidden;
@@ -276,8 +277,8 @@
   }
   .hero-eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
   .hero h1 {
-    font-size: clamp(40px, 7vw, 82px); font-weight: 500;
-    letter-spacing: -0.025em; line-height: 1.02; max-width: 960px;
+    font-size: clamp(44px, 7.6vw, 90px); font-weight: 500;
+    letter-spacing: -0.025em; line-height: 1.02; max-width: 990px;
   }
   .hero h1 .accent {
     font-style: italic; font-weight: 500;
@@ -339,16 +340,20 @@
     cursor: pointer; border: none; font-family: var(--font-body); letter-spacing: -0.01em;
   }
   .btn-primary {
-    background: var(--gold);
-    color: #17130a;
+    background: rgba(201,164,69,0.55);
+    color: #f5f0e2;
   }
+  .glass-host { position: relative; display: inline-block; }
+  .glass-host-circle { border-radius: 50%; }
+  .glass-host > .glass-container { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .glass-host > *:not(.glass-container) { position: relative; z-index: 1; }
   /* Wanderndes Glanzlicht ueber dem CTA. */
   .btn-primary::after {
     content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg); transition: none;
   }
-  .btn-primary:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .btn-primary:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
   .btn-primary:hover::after { animation: shine .9s var(--ease-out); }
   @keyframes shine { to { left: 140%; } }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
@@ -652,7 +657,7 @@
 <nav aria-label="Hauptnavigation">
   <div class="nav-inner">
     <div class="nav-left">
-      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite">&larr;</a>
+      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite" data-glass-bg="17" data-glass-shape="circle">&larr;</a>
       <a class="nav-logo" href="index.html">Mats <span>Denninger</span></a>
     </div>
     <div class="nav-right">
@@ -662,7 +667,7 @@
         <li><a href="#demo">Live-Demo</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
-      <a class="nav-cta" href="#kontakt">Erstgespräch</a>
+      <a class="nav-cta" href="#kontakt" data-glass-bg="8">Erstgespräch</a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Navigation öffnen">
         <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
           <rect y="0" width="18" height="2" rx="1"/><rect y="6" width="18" height="2" rx="1"/><rect y="12" width="18" height="2" rx="1"/>
@@ -680,8 +685,8 @@
   <h1 class="hero-anim">Ihr Team tippt ab,<br><span class="accent">was längst von selbst laufen könnte.</span></h1>
   <p class="hero-anim">Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. Nach vier Wochen wissen Sie, wie viele Stunden pro Woche drin sind — und der erste Prozess läuft bereits.</p>
   <div class="hero-cta hero-anim">
-    <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen — 30 Min., kostenlos</a>
-    <a class="btn btn-secondary" href="#demo">Erst die Demo testen</a>
+    <a class="btn btn-primary" href="#kontakt" data-glass-bg="10">Erstgespräch buchen — 30 Min., kostenlos</a>
+    <a class="btn btn-secondary" href="#demo" data-glass-bg="10">Erst die Demo testen</a>
   </div>
   <ul class="hero-facts hero-anim">
     <li><strong>2.900 €</strong> Festpreis, keine Nachberechnung</li>
@@ -768,8 +773,8 @@
         <div class="capacity"><span class="dot"></span> Ich nehme zwei Projekte pro Monat an, weil ich sie selbst durchführe.</div>
 
         <div class="offer-actions">
-          <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen</a>
-          <a class="btn btn-secondary" href="#ablauf">Ablauf ansehen</a>
+          <a class="btn btn-primary" href="#kontakt" data-glass-bg="10">Erstgespräch buchen</a>
+          <a class="btn btn-secondary" href="#ablauf" data-glass-bg="10">Ablauf ansehen</a>
         </div>
       </div>
     </div>
@@ -839,7 +844,7 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
         </div>
 
         <div class="demo-actions">
-          <button class="btn btn-primary btn-small" id="runBtn">Analyse starten</button>
+          <button class="btn btn-primary btn-small" id="runBtn" data-glass-bg="10">Analyse starten</button>
           <span class="demo-status" id="demoStatus"></span>
         </div>
 
@@ -916,7 +921,7 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
         <div class="booking-box">
           <h4>Was im Erstgespräch passiert</h4>
           <p>Sie schildern, wo bei Ihnen Zeit verloren geht. Ich sage Ihnen ehrlich, ob sich das automatisieren lässt und ob sich der Zeitgewinn-Check für Sie rechnet. Falls nicht, sage ich das auch — dann haben wir beide dreißig Minuten gut investiert.</p>
-          <a class="btn btn-primary btn-small" id="bookingBtn" href="#contactForm">Termin vorschlagen</a>
+          <a class="btn btn-primary btn-small" id="bookingBtn" href="#contactForm" data-glass-bg="10">Termin vorschlagen</a>
         </div>
         <div class="contact-detail"><span class="ci">E-Mail</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
         <div class="contact-detail"><span class="ci">Adresse</span> Amselstraße 48, 40627 Düsseldorf</div>
@@ -940,7 +945,7 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
           <label for="cMsg">Wo geht bei Ihnen Zeit verloren?</label>
           <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Erstgespräch anfragen</button>
+        <button type="submit" class="btn btn-primary" data-glass-bg="10">Erstgespräch anfragen</button>
         <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
         <div class="form-status" id="formStatus" role="status" hidden></div>
       </form>
@@ -1044,6 +1049,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
     <br><button type="button" class="copy-btn">Nachricht kopieren</button>`;
 
   const copyBtn = formStatus.querySelector('.copy-btn');
+  if (window.glassifyLater) window.glassifyLater(copyBtn, 8);
   copyBtn.addEventListener('click', async () => {
     const full = `${subjectText}\n\n${bodyText}`;
     try {
@@ -1201,6 +1207,10 @@ runBtn.addEventListener('click', async () => {
 </script>
 
 <script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
+<script src="vendor/liquid-glass/html2canvas.min.js"></script>
+<script src="vendor/liquid-glass/container.js"></script>
+<script src="vendor/liquid-glass/button.js"></script>
+<script src="vendor/liquid-glass/glass-init.js"></script>
 <script src="vendor/liquid-logo/liquid-logo.js"></script>
 <script src="vendor/liquid-logo/liquid-logo-init.js"></script>
 

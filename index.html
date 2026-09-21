@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/liquid-glass/glass.css">
 
 <script type="application/ld+json">
 {
@@ -108,18 +109,22 @@
   .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
-    position: relative; overflow: hidden;
-    background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 8px;
+    position: relative; overflow: hidden; display: inline-block;
+    background: rgba(201,164,69,0.55); color: #f5f0e2; padding: 7px 16px; border-radius: 8px;
     font-size: 13px; font-weight: 500; text-decoration: none;
     transition: background .2s, transform .2s var(--ease-out);
   }
+  .glass-host { position: relative; display: inline-block; }
+  .glass-host-circle { border-radius: 50%; }
+  .glass-host > .glass-container { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .glass-host > *:not(.glass-container) { position: relative; z-index: 1; }
   /* Wanderndes Glanzlicht ueber dem CTA. */
   .nav-cta::after {
     content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg); transition: none;
   }
-  .nav-cta:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .nav-cta:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
   .nav-cta:hover::after { animation: shine .9s var(--ease-out); }
   @keyframes shine { to { left: 140%; } }
   @media (max-width: 640px) { .nav-links { display: none; } }
@@ -166,8 +171,8 @@
     transform: skewX(-18deg);
   }
   .btn:hover::after { animation: shine .9s var(--ease-out); }
-  .btn-primary { background: var(--gold); color: #17130a; }
-  .btn-primary:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .btn-primary { background: rgba(201,164,69,0.55); color: #f5f0e2; }
+  .btn-primary:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
   .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
   .btn-small { padding: 11px 22px; font-size: 14px; }
@@ -330,7 +335,7 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a class="nav-cta" href="#kontakt">Kontakt aufnehmen</a>
+      <a class="nav-cta" href="#kontakt" data-glass-bg="8">Kontakt aufnehmen</a>
     </div>
   </div>
 </nav>
@@ -437,7 +442,7 @@
         <div class="booking-box">
           <h4>Was im Gespräch passiert</h4>
           <p>Sie schildern kurz, worum es geht. Ich sage Ihnen ehrlich, welches Angebot passt — oder ob sich aktuell keines davon lohnt. Falls nicht, sage ich das auch.</p>
-          <a class="btn btn-primary btn-small" href="#contactForm">Termin vorschlagen</a>
+          <a class="btn btn-primary btn-small" href="#contactForm" data-glass-bg="10">Termin vorschlagen</a>
         </div>
         <div class="contact-detail"><span class="ci">E-Mail</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
         <div class="contact-detail"><span class="ci">Adresse</span> Amselstraße 48, 40627 Düsseldorf</div>
@@ -461,7 +466,7 @@
           <label for="cMsg">Worum geht es?</label>
           <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Anfrage senden</button>
+        <button type="submit" class="btn btn-primary" data-glass-bg="10">Anfrage senden</button>
         <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
         <div class="form-status" id="formStatus" role="status" hidden></div>
       </form>
@@ -525,6 +530,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
     <br><button type="button" class="copy-btn">Nachricht kopieren</button>`;
 
   const copyBtn = formStatus.querySelector('.copy-btn');
+  if (window.glassifyLater) window.glassifyLater(copyBtn, 8);
   copyBtn.addEventListener('click', async () => {
     const full = `${subjectText}\n\n${bodyText}`;
     try {
@@ -543,6 +549,10 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
 </script>
 
 <script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
+<script src="vendor/liquid-glass/html2canvas.min.js"></script>
+<script src="vendor/liquid-glass/container.js"></script>
+<script src="vendor/liquid-glass/button.js"></script>
+<script src="vendor/liquid-glass/glass-init.js"></script>
 
 </body>
 </html>

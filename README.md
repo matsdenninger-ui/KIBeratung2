@@ -16,6 +16,7 @@ Live-Demo mit Claude versorgt.
 | `gradient-app/` | React/Vite-Miniprojekt, das den animierten ShaderGradient-Hero-Hintergrund baut (siehe `gradient-app/README.md`) |
 | `assets/shader-gradient/` | Gebautes Ergebnis von `gradient-app/` — wird mit committet, kein Build-Schritt beim Hosting nötig |
 | `vendor/liquid-logo/` | Vanilla-JS-Portierung des Liquid-Metal-Shaders von [liquid.paper.design](https://liquid.paper.design) fürs "MD"-Monogramm, PolyForm-Shield-lizenziert |
+| `vendor/liquid-glass/` | Selbst gehostete, angepasste Kopie von liquid-glass-js + html2canvas fürs WebGL-Glass hinter Buttons/Headlines |
 
 Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
 
@@ -32,20 +33,34 @@ neue `assets/shader-gradient/shader-gradient.js` mit committen** — die
 Website selbst lädt nur die fertig gebaute Datei, kein Build beim
 Deployment nötig.
 
-## Buttons
+## Buttons & Liquid Glass
 
 Alle klickbaren Buttons (Nav-CTA, Primary-/Secondary-Buttons, "Termin
-vorschlagen", Formular-Submit, "Nachricht kopieren") nutzen einheitlich
-dieselbe flache CSS-Optik: Volltonfarbe bzw. Outline, beim Hover ein
-leichtes Anheben (`translateY(-2px)`) und ein wanderndes Glanzlicht
-(`::after` mit `@keyframes shine`).
+vorschlagen", Formular-Submit, "Nachricht kopieren") behalten ihre
+echten `<a>`/`<button>`-Elemente inkl. aller IDs, Event-Listener und
+nativer Semantik — inklusive dem einheitlichen Hover-Verhalten (leichtes
+Anheben `translateY(-2px)` plus wanderndes Glanzlicht `::after` mit
+`@keyframes shine`).
 
-Ein früherer Versuch, die Haupt-CTAs durch echte WebGL-"Liquid
-Glass"-Buttons (liquid-glass-js) zu ersetzen, wurde wieder entfernt: Die
-Refraktion hing vom jeweiligen Hintergrund ab und sah je nach Seite
-matschig/inkonsistent aus, war ohne Tastatur nicht bedienbar und verbrauchte
-zusätzliche WebGL-Kontexte. Für einheitliche, zuverlässige Buttons war die
-einfache CSS-Lösung die bessere Wahl.
+Zusätzlich bekommen alle Buttons sowie die Überschriften-Blöcke von
+`kurse.html` und `websitebau.html` einen echten WebGL-"Liquid
+Glass"-Hintergrund (portiert von liquid-glass-js, selbst gehostet in
+`vendor/liquid-glass/`). Ein früherer Versuch, die Buttons *durch*
+liquid-glass-js-Elemente zu *ersetzen*, war problematisch (nicht
+tastaturbedienbar, uneinheitliche Refraktion). Der jetzige Ansatz ist
+sicherer: `glass-init.js` sucht alle Elemente mit `[data-glass-bg]`,
+steckt sie unangetastet in einen `.glass-host`-Wrapper und legt eine rein
+dekorative, nicht-interaktive `Container`-Instanz (aria-hidden,
+`pointer-events:none`, niedrigerer z-index) dahinter. Das echte Element
+bleibt komplett funktional (Formulare, Demo-Button, Tastatur/No-JS), das
+Glas ist reines Hintergrund-Deko.
+
+Der WebGL-Shader tönt die Refraktion warm gold/amber statt der
+ursprünglichen Weiß/Grau-Töne, damit das Glas auf jedem Hintergrund der
+Seite konsistent und "on-brand" wirkt statt matschig zu reflektieren.
+Die Hintergrund-Momentaufnahme dafür wird einmalig per html2canvas
+(`vendor/liquid-glass/html2canvas.min.js`, selbst gehostet) erstellt,
+nachdem die Seite vollständig geladen ist.
 
 ## Liquid-Metal-Monogramm (liquid-logo)
 
