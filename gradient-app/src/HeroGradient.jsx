@@ -11,6 +11,7 @@ export default function HeroGradient() {
       pointerEvents="none"
       pixelDensity={1}
       fov={35}
+      preserveDrawingBuffer
     >
       <ShaderGradient
         control="props"

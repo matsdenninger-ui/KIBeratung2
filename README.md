@@ -13,7 +13,6 @@ Live-Demo mit Claude versorgt.
 | `datenschutz.html` | Datenschutzerklaerung, beschreibt die echten Datenfluesse |
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
 | `wrangler.toml` | Worker-Konfiguration |
-| `vendor/liquid-glass/` | Selbst gehostete Kopie von [liquid-glass-js](https://github.com/dashersw/liquid-glass-js) (WebGL-Glaseffekt) + html2canvas, MIT-lizenziert |
 | `gradient-app/` | React/Vite-Miniprojekt, das den animierten ShaderGradient-Hero-Hintergrund baut (siehe `gradient-app/README.md`) |
 | `assets/shader-gradient/` | Gebautes Ergebnis von `gradient-app/` — wird mit committet, kein Build-Schritt beim Hosting nötig |
 | `vendor/liquid-logo/` | Vanilla-JS-Portierung des Liquid-Metal-Shaders von [liquid.paper.design](https://liquid.paper.design) fürs "MD"-Monogramm, PolyForm-Shield-lizenziert |
@@ -33,19 +32,20 @@ neue `assets/shader-gradient/shader-gradient.js` mit committen** — die
 Website selbst lädt nur die fertig gebaute Datei, kein Build beim
 Deployment nötig.
 
-## Glass-Buttons (liquid-glass-js)
+## Buttons
 
-Die Haupt-CTA-Buttons ("Kontakt aufnehmen" / "Erstgespräch" / "Termin
-vorschlagen") werden per JavaScript durch echte WebGL-"Liquid Glass"-Buttons
-ersetzt (`vendor/liquid-glass/glass-init.js` ersetzt jedes Element mit
-`data-glass="pill"`). Bewusste Kompromisse dabei:
+Alle klickbaren Buttons (Nav-CTA, Primary-/Secondary-Buttons, "Termin
+vorschlagen", Formular-Submit, "Nachricht kopieren") nutzen einheitlich
+dieselbe flache CSS-Optik: Volltonfarbe bzw. Outline, beim Hover ein
+leichtes Anheben (`translateY(-2px)`) und ein wanderndes Glanzlicht
+(`::after` mit `@keyframes shine`).
 
-- Die erzeugten Buttons sind reine `<div>`s ohne `href`/`tabindex` — nicht
-  per Tastatur erreichbar. Ohne JavaScript bleibt stattdessen der normale
-  `<a>`-Link stehen (die Ersetzung passiert erst nach dem Laden).
-- `html2canvas` und die Glass-Bibliothek liegen selbst gehostet in
-  `vendor/liquid-glass/`, nicht auf einem CDN — schnellere Ladezeit, keine
-  Abhängigkeit von jsdelivr.
+Ein früherer Versuch, die Haupt-CTAs durch echte WebGL-"Liquid
+Glass"-Buttons (liquid-glass-js) zu ersetzen, wurde wieder entfernt: Die
+Refraktion hing vom jeweiligen Hintergrund ab und sah je nach Seite
+matschig/inkonsistent aus, war ohne Tastatur nicht bedienbar und verbrauchte
+zusätzliche WebGL-Kontexte. Für einheitliche, zuverlässige Buttons war die
+einfache CSS-Lösung die bessere Wahl.
 
 ## Liquid-Metal-Monogramm (liquid-logo)
 
@@ -63,10 +63,10 @@ Produkt — unser Einsatz als Deko-Monogramm fällt nicht darunter.
   Bilddatei nötig.
 - Erst per `IntersectionObserver` gemountet, wenn der Bereich in den
   Viewport scrollt — spart einen WebGL-Kontext beim initialen Laden.
-- Schlägt WebGL2 fehl (älterer Browser, Kontext-Limit durch die bereits
-  aktiven Shader-Gradient-/Glass-Button-Kontexte erreicht o. Ä.), bleibt
-  der dahinterliegende, statische "MD"-Text sichtbar — kein Fehlerbild,
-  nur ein `console.warn`.
+- Schlägt WebGL2 fehl (älterer Browser, Kontext-Limit durch den bereits
+  aktiven Shader-Gradient-Kontext erreicht o. Ä.), bleibt der
+  dahinterliegende, statische "MD"-Text sichtbar — kein Fehlerbild, nur
+  ein `console.warn`.
 
 ## Was an dieser Fassung anders ist
 
