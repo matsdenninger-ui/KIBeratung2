@@ -109,9 +109,10 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
     background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 8px;
-    font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s;
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    transition: background .2s, transform .2s var(--ease-out);
   }
-  .nav-cta:hover { background: var(--gold-soft); }
+  .nav-cta:hover { background: var(--gold-soft); transform: translateY(-2px); }
   @media (max-width: 640px) { .nav-links { display: none; } }
 
   .hero {
