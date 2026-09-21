@@ -5,7 +5,10 @@ Live-Demo mit Claude versorgt.
 
 | Datei | Zweck |
 |---|---|
-| `index.html` | Die komplette Landingpage inkl. Demo-Widget |
+| `index.html` | Generelle Landingpage mit den drei Angeboten (Automatisierung, Kurse, Websitebau) |
+| `potenzialanalyse.html` | Angebotsseite "Zeitgewinn-Check" (Automatisierung) inkl. Demo-Widget — vormals `index.html`, Inhalt unveraendert |
+| `kurse.html` | Angebotsseite Kurse (Platzhalter, im Aufbau) |
+| `websitebau.html` | Angebotsseite Websitebau (Platzhalter, im Aufbau) |
 | `impressum.html` | Anbieterkennzeichnung nach Paragraf 5 DDG |
 | `datenschutz.html` | Datenschutzerklaerung, beschreibt die echten Datenfluesse |
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
@@ -163,7 +166,7 @@ Am Ende erscheint eine URL wie
 
 ### 6. URL in die Website eintragen
 
-In `index.html` ganz oben im `<script>`-Block:
+In `potenzialanalyse.html` ganz oben im `<script>`-Block:
 
 ```js
 const WORKER_URL = "https://claude-demo-proxy.dein-name.workers.dev";
