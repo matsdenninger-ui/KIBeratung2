@@ -75,6 +75,13 @@
   ::selection { background: var(--wine); color: #fff; }
   h1, h2, h3, .hero h1 { font-family: var(--font-display); font-optical-sizing: auto; }
 
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 100%; z-index: 200;
+    transform: scaleX(0); transform-origin: 0 50%;
+    background: linear-gradient(90deg, var(--wine-bright), var(--gold) 60%, var(--gold-bright));
+    will-change: transform;
+  }
+
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(19,19,21,0);
@@ -128,7 +135,11 @@
     font-size: clamp(36px, 6vw, 64px); font-weight: 500;
     letter-spacing: -0.025em; line-height: 1.08; max-width: 820px; text-wrap: balance;
   }
-  .hero h1 .accent { font-style: italic; color: var(--gold-soft); }
+  .hero h1 .accent {
+    font-style: italic; font-weight: 500;
+    background: linear-gradient(115deg, var(--gold-bright), var(--gold) 45%, var(--wine-bright));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
   .hero p { margin-top: 26px; font-size: clamp(16px, 2vw, 19px); color: var(--text-muted); max-width: 600px; line-height: 1.6; }
 
   .btn {
@@ -226,6 +237,8 @@
 <body>
 
 <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <nav aria-label="Hauptnavigation">
   <div class="nav-inner">
@@ -332,9 +345,15 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 const siteNav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  siteNav.classList.toggle('scrolled', (window.scrollY || document.documentElement.scrollTop) > 24);
-}, { passive: true });
+const scrollProgress = document.getElementById('scrollProgress');
+function onScroll() {
+  const st = window.scrollY || document.documentElement.scrollTop;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  if (scrollProgress) scrollProgress.style.transform = `scaleX(${docH > 0 ? st / docH : 0})`;
+  siteNav.classList.toggle('scrolled', st > 24);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 </script>
 
 </body>
