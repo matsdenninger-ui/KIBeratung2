@@ -506,11 +506,14 @@
     position: relative; overflow: hidden;
   }
   .portrait-placeholder {
-    width: 118px; height: 118px; border-radius: 50%;
+    width: 118px; height: 118px; border-radius: 50%; position: relative;
     background: var(--wine);
     display: flex; align-items: center; justify-content: center;
     font-size: 40px; font-weight: 700; color: var(--gold-soft);
+    overflow: hidden;
   }
+  .portrait-fallback { position: relative; z-index: 1; }
+  .portrait-canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; border-radius: 50%; }
   .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 16.5px; }
   .about-text strong { color: var(--text); font-weight: 600; }
 
@@ -846,7 +849,10 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
     <h2>Wer hier eigentlich schreibt.</h2>
     <div class="about-grid">
       <div class="about-portrait reveal reveal-left">
-        <div class="portrait-placeholder">MD</div>
+        <div class="portrait-placeholder">
+          <span class="portrait-fallback">MD</span>
+          <canvas class="portrait-canvas" data-liquid-logo="MD" aria-hidden="true"></canvas>
+        </div>
       </div>
       <div class="about-text reveal reveal-right">
         <p>Mein Name ist <strong>Mats Denninger</strong>. Ich automatisiere Prozesse in Vertrieb, Verwaltung und Handwerk mit KI — und zwar die, die Ihre Leute jeden Tag Zeit kosten.</p>
@@ -1187,6 +1193,8 @@ runBtn.addEventListener('click', async () => {
 <script src="vendor/liquid-glass/button.js"></script>
 <script src="vendor/liquid-glass/glass-init.js"></script>
 <script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
+<script src="vendor/liquid-logo/liquid-logo.js"></script>
+<script src="vendor/liquid-logo/liquid-logo-init.js"></script>
 
 </body>
 </html>
