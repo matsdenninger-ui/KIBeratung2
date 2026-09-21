@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/liquid-glass/glass.css">
 
 <script type="application/ld+json">
 {
@@ -328,7 +329,7 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a class="nav-cta" href="#kontakt">Kontakt aufnehmen</a>
+      <a class="nav-cta" href="#kontakt" data-glass="pill">Kontakt aufnehmen</a>
     </div>
   </div>
 </nav>
@@ -538,6 +539,11 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
   formStatus.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 });
 </script>
+
+<script src="vendor/liquid-glass/html2canvas.min.js"></script>
+<script src="vendor/liquid-glass/container.js"></script>
+<script src="vendor/liquid-glass/button.js"></script>
+<script src="vendor/liquid-glass/glass-init.js"></script>
 
 </body>
 </html>

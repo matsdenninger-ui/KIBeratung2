@@ -13,8 +13,23 @@ Live-Demo mit Claude versorgt.
 | `datenschutz.html` | Datenschutzerklaerung, beschreibt die echten Datenfluesse |
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
 | `wrangler.toml` | Worker-Konfiguration |
+| `vendor/liquid-glass/` | Selbst gehostete Kopie von [liquid-glass-js](https://github.com/dashersw/liquid-glass-js) (WebGL-Glaseffekt) + html2canvas, MIT-lizenziert |
 
 Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
+
+## Glass-Buttons (liquid-glass-js)
+
+Die Haupt-CTA-Buttons ("Kontakt aufnehmen" / "Erstgespräch" / "Termin
+vorschlagen") werden per JavaScript durch echte WebGL-"Liquid Glass"-Buttons
+ersetzt (`vendor/liquid-glass/glass-init.js` ersetzt jedes Element mit
+`data-glass="pill"`). Bewusste Kompromisse dabei:
+
+- Die erzeugten Buttons sind reine `<div>`s ohne `href`/`tabindex` — nicht
+  per Tastatur erreichbar. Ohne JavaScript bleibt stattdessen der normale
+  `<a>`-Link stehen (die Ersetzung passiert erst nach dem Laden).
+- `html2canvas` und die Glass-Bibliothek liegen selbst gehostet in
+  `vendor/liquid-glass/`, nicht auf einem CDN — schnellere Ladezeit, keine
+  Abhängigkeit von jsdelivr.
 
 ## Was an dieser Fassung anders ist
 
