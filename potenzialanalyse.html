@@ -191,17 +191,31 @@
   .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
+    position: relative; overflow: hidden;
     background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 8px;
     font-size: 13px; font-weight: 500; text-decoration: none;
     transition: background .2s, transform .2s var(--ease-out);
   }
+  .nav-cta::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-18deg);
+  }
   .nav-cta:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .nav-cta:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle {
+    position: relative; overflow: hidden;
     display: none; background: transparent; border: 1px solid rgba(255,255,255,0.22);
     color: var(--text); border-radius: 9px; padding: 7px 10px 4px; cursor: pointer;
-    font-family: inherit; transition: border-color .2s;
+    font-family: inherit; transition: border-color .2s, transform .2s var(--ease-out);
   }
-  .nav-toggle:hover { border-color: var(--gold); }
+  .nav-toggle::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .nav-toggle:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .nav-toggle:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle svg { fill: currentColor; }
   @media (max-width: 720px) {
     .nav-toggle { display: inline-block; }
@@ -327,7 +341,13 @@
   .btn-primary:hover::after { animation: shine .9s var(--ease-out); }
   @keyframes shine { to { left: 140%; } }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-secondary::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .btn-secondary:hover::after { animation: shine .9s var(--ease-out); }
   .btn-small { padding: 11px 24px; font-size: 14px; }
 
   /* ---------- Sections ---------- */
@@ -353,9 +373,7 @@
     display: flex; gap: 16px; align-items: flex-start;
     padding: 22px 26px; background: var(--bg-card);
     border-left: 2px solid var(--wine); font-size: 16.5px;
-    transition: background .35s var(--ease-out), border-color .35s var(--ease-out), padding-left .35s var(--ease-out);
   }
-  .pain-list li:hover { background: var(--bg-elevated); border-left-color: var(--wine-bright); padding-left: 34px; }
   .pain-list li:first-child { border-radius: 12px 12px 0 0; }
   .pain-list li:last-child { border-radius: 0 0 12px 12px; }
   .pain-list .mark { color: var(--wine-bright); font-weight: 700; flex-shrink: 0; }
@@ -370,11 +388,7 @@
     margin-top: 44px; background: var(--bg-card);
     border: 1px solid rgba(201,164,69,0.28); border-radius: var(--radius);
     overflow: hidden; position: relative;
-    transition: border-color .3s var(--ease-out);
   }
-  .offer-card:hover { border-color: rgba(201,164,69,0.5); }
-  .deliv-num { transition: background .3s; }
-  .deliverables li:hover .deliv-num { background: rgba(201,164,69,0.28); }
   .offer-head {
     padding: 38px 38px 30px; border-bottom: 1px solid var(--border);
   }
@@ -424,9 +438,7 @@
     background: var(--bg-card);
     border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; position: relative;
     overflow: hidden;
-    transition: border-color .3s var(--ease-out);
   }
-  .step:hover { border-color: var(--gold); }
   .step-day { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
   .step h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
   .step p { color: var(--text-muted); font-size: 14.5px; }
@@ -552,12 +564,19 @@
   }
   .form-status a { color: var(--gold); }
   .form-status .copy-btn {
+    position: relative; overflow: hidden;
     margin-top: 12px; background: transparent; color: var(--text);
     border: 1px solid rgba(255,255,255,0.25); border-radius: 8px;
     padding: 8px 16px; font-size: 13.5px; font-family: inherit; cursor: pointer;
-    transition: border-color .2s, color .2s;
+    transition: border-color .2s, color .2s, transform .2s var(--ease-out);
   }
-  .form-status .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .form-status .copy-btn::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .form-status .copy-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .form-status .copy-btn:hover::after { animation: shine .9s var(--ease-out); }
 
   /* ---------- Footer ---------- */
   footer { border-top: 1px solid var(--border); padding: 38px 24px; }
