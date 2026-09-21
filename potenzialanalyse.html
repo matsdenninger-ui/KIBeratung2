@@ -255,6 +255,8 @@
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 75%);
   }
   .hero > * { position: relative; z-index: 2; }
+  .hero-shader { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.8; }
+  .hero-shader canvas { display: block; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     color: var(--gold); font-size: 12px; font-weight: 600;
@@ -659,6 +661,7 @@
 <main id="inhalt">
 
 <header class="hero" id="top">
+  <div class="hero-shader" data-shader-gradient aria-hidden="true"></div>
   <div class="hero-eyebrow hero-anim">KI-Automatisierung für Vertrieb, Verwaltung &amp; Handwerk</div>
   <h1 class="hero-anim">Ihr Team tippt ab,<br><span class="accent">was längst von selbst laufen könnte.</span></h1>
   <p class="hero-anim">Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. Nach vier Wochen wissen Sie, wie viele Stunden pro Woche drin sind — und der erste Prozess läuft bereits.</p>
@@ -1183,6 +1186,7 @@ runBtn.addEventListener('click', async () => {
 <script src="vendor/liquid-glass/container.js"></script>
 <script src="vendor/liquid-glass/button.js"></script>
 <script src="vendor/liquid-glass/glass-init.js"></script>
+<script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
 
 </body>
 </html>

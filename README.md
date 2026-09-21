@@ -14,8 +14,23 @@ Live-Demo mit Claude versorgt.
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
 | `wrangler.toml` | Worker-Konfiguration |
 | `vendor/liquid-glass/` | Selbst gehostete Kopie von [liquid-glass-js](https://github.com/dashersw/liquid-glass-js) (WebGL-Glaseffekt) + html2canvas, MIT-lizenziert |
+| `gradient-app/` | React/Vite-Miniprojekt, das den animierten ShaderGradient-Hero-Hintergrund baut (siehe `gradient-app/README.md`) |
+| `assets/shader-gradient/` | Gebautes Ergebnis von `gradient-app/` — wird mit committet, kein Build-Schritt beim Hosting nötig |
 
 Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
+
+## Shader-Gradient-Hero (React/Vite-Insel)
+
+Die Hero-Bereiche von `index.html` und `potenzialanalyse.html` haben
+einen animierten, dreidimensionalen Farbverlauf
+([ShaderGradient](https://github.com/ruucm/shadergradient)/
+[react-three-fiber](https://github.com/pmndrs/react-three-fiber)) in
+Gold/Wein/Anthrazit als Hintergrund. Das ist die einzige Stelle der
+Website, die einen Build-Schritt braucht — siehe `gradient-app/README.md`
+für Details. Nach Änderungen dort **`npm run build` ausführen und die
+neue `assets/shader-gradient/shader-gradient.js` mit committen** — die
+Website selbst lädt nur die fertig gebaute Datei, kein Build beim
+Deployment nötig.
 
 ## Glass-Buttons (liquid-glass-js)
 

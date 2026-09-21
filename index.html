@@ -136,6 +136,8 @@
     pointer-events: none;
   }
   .hero > * { position: relative; z-index: 2; }
+  .hero-shader { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.8; }
+  .hero-shader canvas { display: block; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     color: var(--gold); font-size: 12px; font-weight: 600;
@@ -337,6 +339,7 @@
 <main id="inhalt">
 
 <header class="hero" id="top">
+  <div class="hero-shader" data-shader-gradient aria-hidden="true"></div>
   <div class="hero-eyebrow reveal">KI &amp; digitale Prozesse für den Mittelstand</div>
   <h1 class="reveal">Drei Wege, wie ich Ihr Unternehmen <span class="accent">spürbar voranbringe.</span></h1>
   <p class="reveal">Ob automatisierte Prozesse, praxisnahe KI-Kurse für Ihr Team oder eine Website, die tatsächlich Kunden bringt — wählen Sie, wo Sie starten möchten.</p>
@@ -544,6 +547,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
 <script src="vendor/liquid-glass/container.js"></script>
 <script src="vendor/liquid-glass/button.js"></script>
 <script src="vendor/liquid-glass/glass-init.js"></script>
+<script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
 
 </body>
 </html>
