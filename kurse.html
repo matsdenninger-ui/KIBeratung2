@@ -20,9 +20,20 @@
     :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
     h1,h2{font-family:var(--font-display)}
     .scroll-progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:200;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--wine-bright),var(--gold) 60%,var(--gold-bright))}
-    .wrap{max-width:760px;margin:0 auto;padding:64px 24px 90px}
-    .back{display:inline-block;font-size:14px;color:var(--text-muted);text-decoration:none;margin-bottom:40px}
-    .back:hover{color:var(--gold)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(19,19,21,0);border-bottom:1px solid transparent;transition:background .4s cubic-bezier(0.16,1,0.3,1),border-color .4s cubic-bezier(0.16,1,0.3,1)}
+    nav.scrolled{background:rgba(19,19,21,0.97);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1120px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:height .4s cubic-bezier(0.16,1,0.3,1)}
+    nav.scrolled .nav-inner{height:54px}
+    .nav-left{display:flex;align-items:center;gap:14px}
+    .nav-back{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.22);color:var(--text);text-decoration:none;font-size:16px;transition:border-color .2s,color .2s,transform .2s cubic-bezier(0.16,1,0.3,1)}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);transform:translateX(-2px)}
+    .nav-logo{font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:-0.01em;color:var(--text);text-decoration:none}
+    .nav-logo span{color:var(--gold)}
+    .nav-cta{position:relative;overflow:hidden;background:var(--gold);color:#1a1a1c;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s,transform .2s cubic-bezier(0.16,1,0.3,1)}
+    .nav-cta::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,0.55),transparent);transform:skewX(-18deg)}
+    .nav-cta:hover{background:var(--gold-soft);transform:translateY(-2px)}
+    .nav-cta:hover::after{animation:shine .9s cubic-bezier(0.16,1,0.3,1)}
+    .wrap{max-width:760px;margin:0 auto;padding:112px 24px 90px}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
     h1{font-size:clamp(32px,5.5vw,48px);font-weight:600;letter-spacing:-0.02em;line-height:1.12;margin-bottom:18px;text-wrap:balance}
     h1 .accent{font-style:italic;background:linear-gradient(115deg,var(--gold-bright),var(--gold) 45%,var(--wine-bright));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -67,9 +78,16 @@
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<nav aria-label="Hauptnavigation">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite">&larr;</a>
+      <a class="nav-logo" href="index.html">Mats <span>Denninger</span></a>
+    </div>
+    <a class="nav-cta" href="#kontakt">Kontakt aufnehmen</a>
+  </div>
+</nav>
 <div class="wrap">
-  <a class="back" href="index.html">&larr; Zurück zur Startseite</a>
-
   <div class="eyebrow">Kurse</div>
   <h1>KI-Kurse für <span class="accent">Teams &amp; Einzelpersonen</span></h1>
   <p class="lead">Praxisnahes Wissen, damit Ihr Team KI-Tools selbstständig und sicher im Arbeitsalltag einsetzt — ohne Fachchinesisch und ohne Vorwissen.</p>
@@ -126,10 +144,12 @@
 </div>
 <script>
 const scrollProgress = document.getElementById('scrollProgress');
+const siteNav = document.querySelector('nav');
 function onScroll() {
   const st = window.scrollY || document.documentElement.scrollTop;
   const docH = document.documentElement.scrollHeight - window.innerHeight;
   scrollProgress.style.transform = `scaleX(${docH > 0 ? st / docH : 0})`;
+  siteNav.classList.toggle('scrolled', st > 24);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
