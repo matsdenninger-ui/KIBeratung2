@@ -167,7 +167,7 @@ class Container {
     this.canvas.style.left = '0'
     this.canvas.style.width = '100%'
     this.canvas.style.height = '100%'
-    this.canvas.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.25)'
+    this.canvas.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.24)'
     this.canvas.style.zIndex = '-1' // Canvas behind children
 
     this.element.appendChild(this.canvas)
