@@ -309,7 +309,7 @@
 
   .btn {
     position: relative; display: inline-block; padding: 15px 32px; border-radius: var(--radius);
-    font-size: 15.5px; font-weight: 500; text-decoration: none;
+    font-size: 15.5px; font-weight: 500; text-decoration: none; overflow: hidden;
     transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-out);
     cursor: pointer; border: none; font-family: var(--font-body); letter-spacing: -0.01em;
   }
@@ -317,7 +317,15 @@
     background: var(--gold);
     color: #17130a;
   }
+  /* Wanderndes Glanzlicht ueber dem CTA. */
+  .btn-primary::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-18deg); transition: none;
+  }
   .btn-primary:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .btn-primary:hover::after { animation: shine .9s var(--ease-out); }
+  @keyframes shine { to { left: 140%; } }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
   .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
   .btn-small { padding: 11px 24px; font-size: 14px; }
