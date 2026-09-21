@@ -42,8 +42,8 @@ nativer Semantik — inklusive dem einheitlichen Hover-Verhalten (leichtes
 Anheben `translateY(-2px)` plus wanderndes Glanzlicht `::after` mit
 `@keyframes shine`).
 
-Zusätzlich bekommen alle Buttons sowie die Überschriften-Blöcke von
-`kurse.html` und `websitebau.html` einen echten WebGL-"Liquid
+Manche Buttons sowie die Überschriften-Blöcke von `kurse.html` und
+`websitebau.html` bekommen zusätzlich einen echten WebGL-"Liquid
 Glass"-Hintergrund (portiert von liquid-glass-js, selbst gehostet in
 `vendor/liquid-glass/`). Ein früherer Versuch, die Buttons *durch*
 liquid-glass-js-Elemente zu *ersetzen*, war problematisch (nicht
@@ -61,6 +61,20 @@ Seite konsistent und "on-brand" wirkt statt matschig zu reflektieren.
 Die Hintergrund-Momentaufnahme dafür wird einmalig per html2canvas
 (`vendor/liquid-glass/html2canvas.min.js`, selbst gehostet) erstellt,
 nachdem die Seite vollständig geladen ist.
+
+**Wichtige Einschränkung:** Auf echtem iOS/Safari zeigte das WebGL-Glas
+bei (fast) vollrunden Formen (border-radius nahe der halben Boxhöhe —
+Kreise, Pillen) einen sichtbaren Rendering-Fehler (verschobene/kleinere
+Glas-Kontur, "Geisterbild"), der sich in Chromium nicht reproduzieren
+ließ — vermutlich eine WebKit-spezifische Eigenart der SDF-Rundungs-Mathe
+im Shader bei extremen Radien. Deshalb bekommen runde/pillenförmige
+Elemente (Zurück-Button, Nav-CTA, "Erstgespräch"/"Kontakt aufnehmen"/
+"Termin vorschlagen"/"Anfrage senden"-Buttons) **kein** `data-glass-bg`
+mehr, sondern nur noch normales CSS `backdrop-filter: blur()` auf ihrem
+ohnehin schon halbtransparenten Gold-Hintergrund. Echtes WebGL-Glas
+bleibt reserviert für Elemente mit moderatem border-radius (Header-Glass-
+Panels, sekundäre Buttons wie "Ablauf ansehen"/"Erst die Demo testen"),
+wo es auf echten Geräten sauber gerendert wurde.
 
 ## Liquid-Metal-Monogramm (liquid-logo)
 
