@@ -186,11 +186,13 @@
   .nav-back {
     display: inline-flex; align-items: center; justify-content: center;
     width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,0.22); color: var(--text);
+    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(201,164,69,0.12); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: var(--text);
     text-decoration: none; font-size: 16px;
-    transition: border-color .2s, color .2s, transform .2s var(--ease-out);
+    transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-out);
   }
-  .nav-back:hover { border-color: var(--gold); color: var(--gold); transform: translateX(-2px); }
+  .nav-back:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,164,69,0.22); transform: translateX(-2px); }
   .nav-logo {
     font-family: var(--font-display); font-weight: 600; font-size: 17px;
     letter-spacing: -0.01em; color: var(--text); text-decoration: none;
@@ -667,7 +669,7 @@
 <nav aria-label="Hauptnavigation">
   <div class="nav-inner">
     <div class="nav-left">
-      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite" data-glass-bg="17" data-glass-shape="circle">&larr;</a>
+      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite">&larr;</a>
       <a class="nav-logo" href="index.html">Mats <span>Denninger</span></a>
     </div>
     <div class="nav-right">
