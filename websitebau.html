@@ -40,6 +40,26 @@
     .other-offers{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px}
     .other-offers a{font-size:14px;color:var(--text-muted);text-decoration:none;border-bottom:1px solid rgba(201,164,69,0.4)}
     .other-offers a:hover{color:var(--gold)}
+    .kontakt-block{margin-top:64px;padding-top:40px;border-top:1px solid var(--border)}
+    .kontakt-block h2{font-size:clamp(24px,4vw,32px);font-weight:600;letter-spacing:-0.01em;margin-bottom:22px;text-wrap:balance}
+    .booking-box{margin-bottom:24px;padding:20px 22px;border-radius:14px;background:rgba(201,164,69,0.07);border:1px solid rgba(201,164,69,0.28)}
+    .booking-box p{font-size:14.5px;color:var(--text-muted);margin-bottom:14px}
+    .contact-detail{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;font-size:14.5px}
+    .contact-detail .ci{color:var(--gold-soft);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;width:80px;flex-shrink:0;margin-top:3px}
+    form{margin-top:26px}
+    form .field{margin-bottom:16px}
+    form label{display:block;font-size:13px;color:var(--text-muted);margin-bottom:7px;font-weight:500}
+    form input,form textarea{width:100%;padding:12px 15px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-size:15px;outline:none;font-family:inherit;transition:border-color .2s}
+    form input:focus,form textarea:focus{border-color:var(--gold)}
+    form textarea{resize:vertical;min-height:100px}
+    .optional{font-weight:400;color:var(--text-muted);opacity:.75}
+    .form-note{font-size:12.5px;color:var(--text-muted);margin-top:12px}
+    .form-status{margin-top:16px;padding:16px 18px;border-radius:14px;background:rgba(201,164,69,0.08);border:1px solid rgba(201,164,69,0.3);font-size:14.5px;line-height:1.55}
+    .form-status a{color:var(--gold)}
+    .form-status .copy-btn{position:relative;overflow:hidden;margin-top:12px;background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 16px;font-size:13.5px;font-family:inherit;cursor:pointer;transition:border-color .2s,color .2s,transform .2s cubic-bezier(0.16,1,0.3,1)}
+    .form-status .copy-btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,0.4),transparent);transform:skewX(-18deg)}
+    .form-status .copy-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+    .form-status .copy-btn:hover::after{animation:shine .9s cubic-bezier(0.16,1,0.3,1)}
     footer{border-top:1px solid var(--border);margin-top:56px;padding-top:22px;font-size:13.5px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
     footer a{color:var(--text-muted);text-decoration:none}
     footer a:hover{color:var(--gold)}
@@ -60,11 +80,43 @@
     <p>Die Details zu diesem Angebot werden gerade ausgearbeitet. Wenn Sie schon jetzt eine neue Website oder eine Überarbeitung Ihrer bestehenden Seite planen, schreiben Sie mir gerne — ich melde mich innerhalb von 24 Stunden.</p>
   </div>
 
-  <a class="btn" href="mailto:matsdenninger@gmail.com?subject=Interesse%20an%20Websitebau">Interesse melden</a>
-
   <div class="other-offers">
     <a href="potenzialanalyse.html">Zum Zeitgewinn-Check (Automatisierung)</a>
     <a href="kurse.html">Zu den Kursen</a>
+  </div>
+
+  <div class="kontakt-block" id="kontakt">
+    <h2>Lassen Sie uns dreißig Minuten sprechen.</h2>
+    <div class="booking-box">
+      <p>Sie schildern kurz, worum es geht. Ich sage Ihnen ehrlich, ob und wie ein neuer Website-Auftritt für Sie Sinn ergibt.</p>
+      <a class="btn" href="#contactForm">Termin vorschlagen</a>
+    </div>
+    <div class="contact-detail"><span class="ci">E-Mail</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
+    <div class="contact-detail"><span class="ci">Adresse</span> Amselstraße 48, 40627 Düsseldorf</div>
+    <div class="contact-detail"><span class="ci">Arbeitsweise</span> Remote und per Videocall · vor Ort im Raum Düsseldorf</div>
+    <div class="contact-detail"><span class="ci">Reaktion</span> Antwort innerhalb von 24 Stunden</div>
+
+    <form id="contactForm">
+      <div class="field">
+        <label for="cName">Name</label>
+        <input type="text" id="cName" name="name" autocomplete="name" required placeholder="Max Mustermann">
+      </div>
+      <div class="field">
+        <label for="cCompany">Unternehmen <span class="optional">optional</span></label>
+        <input type="text" id="cCompany" name="organization" autocomplete="organization" placeholder="Mustermann GmbH">
+      </div>
+      <div class="field">
+        <label for="cEmail">E-Mail</label>
+        <input type="email" id="cEmail" name="email" autocomplete="email" required placeholder="max@mustermann.de">
+      </div>
+      <div class="field">
+        <label for="cMsg">Neue Website oder Überarbeitung?</label>
+        <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
+      </div>
+      <button type="submit" class="btn">Anfrage senden</button>
+      <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
+      <div class="form-status" id="formStatus" role="status" hidden></div>
+    </form>
   </div>
 
   <footer>
@@ -81,6 +133,44 @@ function onScroll() {
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+const MAIL_TO = 'matsdenninger@gmail.com';
+const formStatus = document.getElementById('formStatus');
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('cName').value.trim();
+  const company = document.getElementById('cCompany').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const msg = document.getElementById('cMsg').value.trim();
+
+  const subjectText = `Kontaktanfrage Websitebau — ${name}${company ? ' (' + company + ')' : ''}`;
+  const bodyText = `Name: ${name}\nUnternehmen: ${company || '—'}\nE-Mail: ${email}\n\nWorum es geht:\n${msg}`;
+
+  window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(bodyText)}`;
+
+  formStatus.hidden = false;
+  formStatus.innerHTML = `
+    <strong>Ihr E-Mail-Programm sollte sich jetzt öffnen.</strong>
+    Falls nichts passiert, schreiben Sie mir direkt an
+    <a href="mailto:${MAIL_TO}">${MAIL_TO}</a> — hier ist Ihre Nachricht zum Kopieren.
+    <br><button type="button" class="copy-btn">Nachricht kopieren</button>`;
+
+  const copyBtn = formStatus.querySelector('.copy-btn');
+  copyBtn.addEventListener('click', async () => {
+    const full = `${subjectText}\n\n${bodyText}`;
+    try {
+      await navigator.clipboard.writeText(full);
+      copyBtn.textContent = 'Kopiert';
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = full; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'width:100%;margin-top:12px;min-height:150px;';
+      copyBtn.replaceWith(ta); ta.select();
+    }
+  });
+
+  formStatus.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+});
 </script>
 </body>
 </html>
