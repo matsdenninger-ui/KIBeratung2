@@ -98,17 +98,23 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
     position: relative; overflow: hidden; display: inline-block;
-    background: rgba(201,164,69,0.55); color: #f5f0e2; padding: 7px 18px; border-radius: 999px;
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    background: linear-gradient(150deg, #f7e9c4 0%, #ecd699 18%, #c9a445 42%, #a37f2e 60%, #d8bb73 78%, #8f6c28 100%);
+    color: #251a09; padding: 7px 18px; border-radius: 999px;
+    border: 1px solid rgba(255,241,212,0.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 5px rgba(40,20,5,0.3), 0 6px 16px rgba(0,0,0,0.28);
     font-size: 13px; font-weight: 500; text-decoration: none;
-    transition: background .2s, transform .2s var(--ease-out);
+    transition: background .2s, transform .2s var(--ease-out), box-shadow .2s;
   }
   .nav-cta::after {
     content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg);
   }
-  .nav-cta:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
+  .nav-cta:hover {
+    background: linear-gradient(150deg, #fcf3da 0%, #f2e1ab 18%, #d9bc72 42%, #b8924c 60%, #e6cd8b 78%, #a37f2e 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 5px rgba(40,20,5,0.3), 0 10px 22px rgba(0,0,0,0.32);
+  }
   .nav-cta:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle {
     position: relative; overflow: hidden;
@@ -198,14 +204,22 @@
     transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-out);
     cursor: pointer; border: none; font-family: var(--font-body); letter-spacing: -0.01em;
   }
-  .btn.pill { border-radius: 999px; padding-left: 34px; padding-right: 34px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-  .btn-primary { background: rgba(201,164,69,0.55); color: #f5f0e2; }
+  .btn.pill { border-radius: 999px; padding-left: 34px; padding-right: 34px; }
+  .btn-primary {
+    background: linear-gradient(150deg, #f7e9c4 0%, #ecd699 18%, #c9a445 42%, #a37f2e 60%, #d8bb73 78%, #8f6c28 100%);
+    color: #251a09; border: 1px solid rgba(255,241,212,0.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 5px rgba(40,20,5,0.3), 0 8px 20px rgba(0,0,0,0.28);
+  }
   .btn-primary::after {
     content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg);
   }
-  .btn-primary:hover { background: rgba(217,188,114,0.72); transform: translateY(-2px); }
+  .btn-primary:hover {
+    background: linear-gradient(150deg, #fcf3da 0%, #f2e1ab 18%, #d9bc72 42%, #b8924c 60%, #e6cd8b 78%, #a37f2e 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 5px rgba(40,20,5,0.3), 0 14px 28px rgba(0,0,0,0.32);
+  }
   .btn-primary:hover::after { animation: shine .9s var(--ease-out); }
   @keyframes shine { to { left: 140%; } }
   .btn-small { padding: 11px 24px; font-size: 14px; }
