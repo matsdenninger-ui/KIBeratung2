@@ -20,7 +20,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="vendor/liquid-glass/glass.css">
 
 <script type="application/ld+json">
 {
@@ -117,10 +116,6 @@
     font-size: 13px; font-weight: 500; text-decoration: none;
     transition: background .2s, transform .2s var(--ease-out), box-shadow .2s;
   }
-  .glass-host { position: relative; display: inline-block; }
-  .glass-host-circle { border-radius: 50%; }
-  .glass-host > .glass-container { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-  .glass-host > *:not(.glass-container) { position: relative; z-index: 1; }
   /* Wanderndes Glanzlicht ueber dem CTA. */
   .nav-cta::after {
     content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
@@ -546,7 +541,6 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
     <br><button type="button" class="copy-btn">Nachricht kopieren</button>`;
 
   const copyBtn = formStatus.querySelector('.copy-btn');
-  if (window.glassifyLater) window.glassifyLater(copyBtn, 8);
   copyBtn.addEventListener('click', async () => {
     const full = `${subjectText}\n\n${bodyText}`;
     try {
@@ -565,10 +559,6 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
 </script>
 
 <script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
-<script src="vendor/liquid-glass/html2canvas.min.js"></script>
-<script src="vendor/liquid-glass/container.js"></script>
-<script src="vendor/liquid-glass/button.js"></script>
-<script src="vendor/liquid-glass/glass-init.js"></script>
 
 </body>
 </html>

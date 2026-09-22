@@ -16,7 +16,6 @@ Live-Demo mit Claude versorgt.
 | `gradient-app/` | React/Vite-Miniprojekt, das den animierten ShaderGradient-Hero-Hintergrund baut (siehe `gradient-app/README.md`) |
 | `assets/shader-gradient/` | Gebautes Ergebnis von `gradient-app/` — wird mit committet, kein Build-Schritt beim Hosting nötig |
 | `vendor/liquid-logo/` | Vanilla-JS-Portierung des Liquid-Metal-Shaders von [liquid.paper.design](https://liquid.paper.design) fürs "MD"-Monogramm, PolyForm-Shield-lizenziert |
-| `vendor/liquid-glass/` | Selbst gehostete, angepasste Kopie von liquid-glass-js + html2canvas fürs WebGL-Glass hinter Buttons/Headlines |
 
 Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
 
@@ -33,48 +32,28 @@ neue `assets/shader-gradient/shader-gradient.js` mit committen** — die
 Website selbst lädt nur die fertig gebaute Datei, kein Build beim
 Deployment nötig.
 
-## Buttons & Liquid Glass
+## Buttons
 
 Alle klickbaren Buttons (Nav-CTA, Primary-/Secondary-Buttons, "Termin
-vorschlagen", Formular-Submit, "Nachricht kopieren") behalten ihre
-echten `<a>`/`<button>`-Elemente inkl. aller IDs, Event-Listener und
-nativer Semantik — inklusive dem einheitlichen Hover-Verhalten (leichtes
+vorschlagen", Formular-Submit, "Nachricht kopieren") sind echte
+`<a>`/`<button>`-Elemente mit voller nativer Semantik (Tastatur, No-JS,
+Formulare funktionieren unabhängig vom Styling). Optik: ein mehrstufiger,
+statischer Metall-Verlauf (Gold für primäre Buttons, dunkles Bronze für
+sekundäre) mit Bevel-Highlight per `inset box-shadow` — angelehnt an die
+Farbgebung des Liquid-Metal-Monogramms (siehe unten), aber bewusst
+statisch statt animiert. Dazu das einheitliche Hover-Verhalten (leichtes
 Anheben `translateY(-2px)` plus wanderndes Glanzlicht `::after` mit
 `@keyframes shine`).
 
-Manche Buttons sowie die Überschriften-Blöcke von `kurse.html` und
-`websitebau.html` bekommen zusätzlich einen echten WebGL-"Liquid
-Glass"-Hintergrund (portiert von liquid-glass-js, selbst gehostet in
-`vendor/liquid-glass/`). Ein früherer Versuch, die Buttons *durch*
-liquid-glass-js-Elemente zu *ersetzen*, war problematisch (nicht
-tastaturbedienbar, uneinheitliche Refraktion). Der jetzige Ansatz ist
-sicherer: `glass-init.js` sucht alle Elemente mit `[data-glass-bg]`,
-steckt sie unangetastet in einen `.glass-host`-Wrapper und legt eine rein
-dekorative, nicht-interaktive `Container`-Instanz (aria-hidden,
-`pointer-events:none`, niedrigerer z-index) dahinter. Das echte Element
-bleibt komplett funktional (Formulare, Demo-Button, Tastatur/No-JS), das
-Glas ist reines Hintergrund-Deko.
-
-Der WebGL-Shader tönt die Refraktion warm gold/amber statt der
-ursprünglichen Weiß/Grau-Töne, damit das Glas auf jedem Hintergrund der
-Seite konsistent und "on-brand" wirkt statt matschig zu reflektieren.
-Die Hintergrund-Momentaufnahme dafür wird einmalig per html2canvas
-(`vendor/liquid-glass/html2canvas.min.js`, selbst gehostet) erstellt,
-nachdem die Seite vollständig geladen ist.
-
-**Wichtige Einschränkung:** Auf echtem iOS/Safari zeigte das WebGL-Glas
-bei (fast) vollrunden Formen (border-radius nahe der halben Boxhöhe —
-Kreise, Pillen) einen sichtbaren Rendering-Fehler (verschobene/kleinere
-Glas-Kontur, "Geisterbild"), der sich in Chromium nicht reproduzieren
-ließ — vermutlich eine WebKit-spezifische Eigenart der SDF-Rundungs-Mathe
-im Shader bei extremen Radien. Deshalb bekommen runde/pillenförmige
-Elemente (Zurück-Button, Nav-CTA, "Erstgespräch"/"Kontakt aufnehmen"/
-"Termin vorschlagen"/"Anfrage senden"-Buttons) **kein** `data-glass-bg`
-mehr, sondern nur noch normales CSS `backdrop-filter: blur()` auf ihrem
-ohnehin schon halbtransparenten Gold-Hintergrund. Echtes WebGL-Glas
-bleibt reserviert für Elemente mit moderatem border-radius (Header-Glass-
-Panels, sekundäre Buttons wie "Ablauf ansehen"/"Erst die Demo testen"),
-wo es auf echten Geräten sauber gerendert wurde.
+Frühere Versuche, hierfür echtes WebGL-"Liquid Glass" (liquid-glass-js +
+html2canvas, vormals `vendor/liquid-glass/`) einzusetzen, wurden nach
+mehreren Runden wieder verworfen: auf echtem iOS/Safari zeigte das
+WebGL-Glas bei (fast) vollrunden Formen (Kreise, Pillen) einen sichtbaren
+Rendering-Fehler (verschobene/kleinere Glas-Kontur, "Geisterbild"), der
+sich in Chromium nicht reproduzieren ließ, und selbst bei moderatem
+Radius blieb ein zusätzlicher WebGL-Kontext pro Button unnötiges Gewicht.
+Das reine-CSS-Metall sieht dem "Liquid"-Look sehr ähnlich, ohne dieses
+Risiko oder die Kosten zusätzlicher Canvas-Elemente.
 
 ## Liquid-Metal-Monogramm (liquid-logo)
 
