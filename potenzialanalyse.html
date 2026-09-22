@@ -130,7 +130,7 @@
     --wine-bright: #9c4250;
     --border: rgba(255,255,255,0.09);
     --border-strong: rgba(255,255,255,0.16);
-    --radius: 20px;
+    --radius: 10px;
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -167,16 +167,13 @@
   /* ---------- Nav ---------- */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
     background: rgba(19,19,21,0);
     border-bottom: 1px solid transparent;
-    transition: background .4s var(--ease-out), border-color .4s var(--ease-out), box-shadow .4s var(--ease-out);
+    transition: background .4s var(--ease-out), border-color .4s var(--ease-out);
   }
   nav.scrolled {
-    background: rgba(19,19,21,0.78);
+    background: rgba(19,19,21,0.97);
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
   }
   .nav-inner {
     max-width: 1120px; margin: 0 auto; padding: 0 24px;
@@ -184,6 +181,17 @@
     transition: height .4s var(--ease-out);
   }
   nav.scrolled .nav-inner { height: 54px; }
+  .nav-left { display: flex; align-items: center; gap: 14px; }
+  .nav-back {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(201,164,69,0.12); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: var(--text);
+    text-decoration: none; font-size: 16px;
+    transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-out);
+  }
+  .nav-back:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,164,69,0.22); transform: translateX(-2px); }
   .nav-logo {
     font-family: var(--font-display); font-weight: 600; font-size: 17px;
     letter-spacing: -0.01em; color: var(--text); text-decoration: none;
@@ -194,19 +202,50 @@
   .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
-    background: var(--gold); color: #1a1a1c; padding: 7px 16px; border-radius: 980px;
-    font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s;
+    position: relative; overflow: hidden; display: inline-block;
+    background: linear-gradient(150deg, #f7e9c4 0%, #ecd699 18%, #c9a445 42%, #a37f2e 60%, #d8bb73 78%, #8f6c28 100%);
+    color: #251a09; padding: 7px 18px; border-radius: 999px;
+    border: 1px solid rgba(255,241,212,0.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 5px rgba(40,20,5,0.3), 0 6px 16px rgba(0,0,0,0.28);
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    transition: background .2s, transform .2s var(--ease-out), box-shadow .2s;
   }
-  .nav-cta:hover { background: var(--gold-soft); }
+  .nav-cta::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-18deg);
+  }
+  .nav-cta:hover {
+    background: linear-gradient(150deg, #fcf3da 0%, #f2e1ab 18%, #d9bc72 42%, #b8924c 60%, #e6cd8b 78%, #a37f2e 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 5px rgba(40,20,5,0.3), 0 10px 22px rgba(0,0,0,0.32);
+  }
+  .nav-cta:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle {
+    position: relative; overflow: hidden;
     display: none; background: transparent; border: 1px solid rgba(255,255,255,0.22);
     color: var(--text); border-radius: 9px; padding: 7px 10px 4px; cursor: pointer;
-    font-family: inherit; transition: border-color .2s;
+    font-family: inherit; transition: border-color .2s, transform .2s var(--ease-out);
   }
-  .nav-toggle:hover { border-color: var(--gold); }
+  .nav-toggle::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .nav-toggle:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .nav-toggle:hover::after { animation: shine .9s var(--ease-out); }
   .nav-toggle svg { fill: currentColor; }
   @media (max-width: 720px) {
     .nav-toggle { display: inline-block; }
+    .nav-right { gap: 12px; }
+    .nav-cta { padding: 7px 14px; font-size: 12.5px; }
+  }
+  @media (max-width: 400px) {
+    .nav-inner { padding: 0 16px; }
+    .nav-logo { font-size: 15px; }
+    .nav-left { gap: 10px; }
+  }
+  @media (max-width: 720px) {
     /* Deckend, nicht transparent: eine zweite backdrop-filter innerhalb der
        bereits gefilterten Navigation laesst den Seiteninhalt durchscheinen. */
     .nav-links {
@@ -228,10 +267,7 @@
   }
   .hero::before {
     content: ""; position: absolute; inset: -10% 0 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 55% 42% at 50% 8%, rgba(201,164,69,0.14), transparent 70%),
-      radial-gradient(ellipse 48% 40% at 82% 88%, rgba(114,47,59,0.22), transparent 70%),
-      radial-gradient(ellipse 40% 30% at 12% 70%, rgba(156,66,80,0.10), transparent 70%);
+    background: linear-gradient(180deg, rgba(201,164,69,0.05), transparent 60%);
     pointer-events: none; will-change: transform;
     transform: translateY(var(--parallax, 0));
   }
@@ -245,6 +281,8 @@
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 75%);
   }
   .hero > * { position: relative; z-index: 2; }
+  .hero-shader { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; opacity: 0.8; }
+  .hero-shader canvas { display: block; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     color: var(--gold); font-size: 12px; font-weight: 600;
@@ -256,8 +294,8 @@
   }
   .hero-eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
   .hero h1 {
-    font-size: clamp(40px, 7vw, 82px); font-weight: 500;
-    letter-spacing: -0.025em; line-height: 1.02; max-width: 960px;
+    font-size: clamp(44px, 7.6vw, 90px); font-weight: 500;
+    letter-spacing: -0.025em; line-height: 1.02; max-width: 990px;
   }
   .hero h1 .accent {
     font-style: italic; font-weight: 500;
@@ -313,14 +351,16 @@
   .hero-reassure { margin-top: 22px; font-size: 13.5px; color: var(--text-muted); opacity: .85; }
 
   .btn {
-    position: relative; display: inline-block; padding: 15px 32px; border-radius: 980px;
+    position: relative; display: inline-block; padding: 15px 32px; border-radius: var(--radius);
     font-size: 15.5px; font-weight: 500; text-decoration: none; overflow: hidden;
-    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .3s, color .3s, background .3s;
+    transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-out);
     cursor: pointer; border: none; font-family: var(--font-body); letter-spacing: -0.01em;
   }
+  .btn.pill { border-radius: 999px; padding-left: 34px; padding-right: 34px; }
   .btn-primary {
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
-    color: #17130a; box-shadow: 0 8px 24px rgba(201,164,69,0.22), inset 0 1px 0 rgba(255,255,255,0.35);
+    background: linear-gradient(150deg, #f7e9c4 0%, #ecd699 18%, #c9a445 42%, #a37f2e 60%, #d8bb73 78%, #8f6c28 100%);
+    color: #251a09; border: 1px solid rgba(255,241,212,0.35);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 5px rgba(40,20,5,0.3), 0 8px 20px rgba(0,0,0,0.28);
   }
   /* Wanderndes Glanzlicht ueber dem CTA. */
   .btn-primary::after {
@@ -328,11 +368,29 @@
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
     transform: skewX(-18deg); transition: none;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(201,164,69,0.32), inset 0 1px 0 rgba(255,255,255,0.4); }
+  .btn-primary:hover {
+    background: linear-gradient(150deg, #fcf3da 0%, #f2e1ab 18%, #d9bc72 42%, #b8924c 60%, #e6cd8b 78%, #a37f2e 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -2px 5px rgba(40,20,5,0.3), 0 14px 28px rgba(0,0,0,0.32);
+  }
   .btn-primary:hover::after { animation: shine .9s var(--ease-out); }
   @keyframes shine { to { left: 140%; } }
-  .btn-secondary { background: rgba(255,255,255,0.02); color: var(--text); border: 1px solid var(--border-strong); }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); background: rgba(201,164,69,0.06); }
+  .btn-secondary {
+    background: linear-gradient(150deg, #4a3d2a 0%, #3a3020 20%, #2a2216 45%, #1e1810 65%, #382e1e 82%, #171208 100%);
+    color: var(--gold-soft); border: 1px solid rgba(230,205,139,0.28);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -2px 5px rgba(0,0,0,0.35), 0 6px 14px rgba(0,0,0,0.25);
+  }
+  .btn-secondary::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .btn-secondary:hover {
+    background: linear-gradient(150deg, #5c4c35 0%, #493c29 20%, #362c1c 45%, #241d13 65%, #453824 82%, #201a0f 100%);
+    border-color: rgba(230,205,139,0.42); color: var(--gold-bright); transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -2px 5px rgba(0,0,0,0.35), 0 10px 20px rgba(0,0,0,0.3);
+  }
+  .btn-secondary:hover::after { animation: shine .9s var(--ease-out); }
   .btn-small { padding: 11px 24px; font-size: 14px; }
 
   /* ---------- Sections ---------- */
@@ -358,9 +416,7 @@
     display: flex; gap: 16px; align-items: flex-start;
     padding: 22px 26px; background: var(--bg-card);
     border-left: 2px solid var(--wine); font-size: 16.5px;
-    transition: background .35s var(--ease-out), border-color .35s var(--ease-out), padding-left .35s var(--ease-out);
   }
-  .pain-list li:hover { background: var(--bg-elevated); border-left-color: var(--wine-bright); padding-left: 34px; }
   .pain-list li:first-child { border-radius: 12px 12px 0 0; }
   .pain-list li:last-child { border-radius: 0 0 12px 12px; }
   .pain-list .mark { color: var(--wine-bright); font-weight: 700; flex-shrink: 0; }
@@ -372,18 +428,12 @@
 
   /* ---------- Offer ---------- */
   .offer-card {
-    margin-top: 44px; background: linear-gradient(180deg, var(--bg-card), var(--bg-deep));
+    margin-top: 44px; background: var(--bg-card);
     border: 1px solid rgba(201,164,69,0.28); border-radius: var(--radius);
-    overflow: hidden; box-shadow: 0 30px 90px rgba(0,0,0,0.45);
-    position: relative;
-    transition: box-shadow .5s var(--ease-out), transform .5s var(--ease-out);
+    overflow: hidden; position: relative;
   }
-  .offer-card:hover { box-shadow: 0 40px 110px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,164,69,0.18); }
-  .deliv-num { transition: transform .3s var(--ease-out), background .3s; }
-  .deliverables li:hover .deliv-num { transform: scale(1.12); background: rgba(201,164,69,0.28); }
   .offer-head {
     padding: 38px 38px 30px; border-bottom: 1px solid var(--border);
-    background: linear-gradient(160deg, rgba(114,47,59,0.22), transparent 70%);
   }
   .offer-name { font-size: clamp(26px, 3.6vw, 34px); font-weight: 700; letter-spacing: -0.02em; }
   .offer-tagline { color: var(--text-muted); margin-top: 10px; font-size: 17px; }
@@ -428,18 +478,10 @@
   #ablauf { background: linear-gradient(180deg, var(--bg), #191919 55%, var(--bg)); }
   .timeline { margin-top: 46px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
   .step {
-    background: linear-gradient(180deg, var(--bg-card), var(--bg-deep));
-    border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; position: relative;
     overflow: hidden;
-    transition: transform .4s var(--ease-out), border-color .4s var(--ease-out), box-shadow .4s var(--ease-out);
   }
-  .step::before {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-    transform: scaleX(0); transform-origin: 0 50%; transition: transform .5s var(--ease-out);
-  }
-  .step:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: 0 24px 50px rgba(0,0,0,0.4); }
-  .step:hover::before { transform: scaleX(1); }
   .step-day { font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
   .step h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
   .step p { color: var(--text-muted); font-size: 14.5px; }
@@ -499,16 +541,19 @@
   @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 34px; } }
   .about-portrait {
     aspect-ratio: 1/1; border-radius: var(--radius);
-    background: linear-gradient(160deg, var(--bg-elevated), #1a1a1c 60%);
+    background: var(--bg-elevated);
     border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
   .portrait-placeholder {
-    width: 118px; height: 118px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--wine), var(--wine-bright));
+    width: 118px; height: 118px; border-radius: 50%; position: relative;
+    background: var(--wine);
     display: flex; align-items: center; justify-content: center;
     font-size: 40px; font-weight: 700; color: var(--gold-soft);
+    overflow: hidden;
   }
+  .portrait-fallback { position: relative; z-index: 1; }
+  .portrait-canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; border-radius: 50%; }
   .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 16.5px; }
   .about-text strong { color: var(--text); font-weight: 600; }
 
@@ -536,8 +581,8 @@
   .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; margin-top: 40px; }
   @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 38px; } }
   .contact-info p { color: var(--text-muted); margin-bottom: 22px; font-size: 16px; }
-  .contact-detail { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; font-size: 15px; }
-  .contact-detail .ci { color: var(--gold); font-size: 17px; width: 22px; text-align: center; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; font-size: 15px; }
+  .contact-detail .ci { color: var(--gold-soft); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; width: 88px; flex-shrink: 0; margin-top: 3px; }
   .contact-detail a { color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(201,164,69,0.4); }
   .contact-detail a:hover { color: var(--gold); }
   .booking-box {
@@ -565,12 +610,19 @@
   }
   .form-status a { color: var(--gold); }
   .form-status .copy-btn {
+    position: relative; overflow: hidden;
     margin-top: 12px; background: transparent; color: var(--text);
-    border: 1px solid rgba(255,255,255,0.25); border-radius: 980px;
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 8px;
     padding: 8px 16px; font-size: 13.5px; font-family: inherit; cursor: pointer;
-    transition: border-color .2s, color .2s;
+    transition: border-color .2s, color .2s, transform .2s var(--ease-out);
   }
-  .form-status .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .form-status .copy-btn::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-18deg);
+  }
+  .form-status .copy-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .form-status .copy-btn:hover::after { animation: shine .9s var(--ease-out); }
 
   /* ---------- Footer ---------- */
   footer { border-top: 1px solid var(--border); padding: 38px 24px; }
@@ -631,7 +683,10 @@
 
 <nav aria-label="Hauptnavigation">
   <div class="nav-inner">
-    <a class="nav-logo" href="#top">Mats <span>Denninger</span></a>
+    <div class="nav-left">
+      <a class="nav-back" href="index.html" aria-label="Zurück zur Startseite">&larr;</a>
+      <a class="nav-logo" href="index.html">Mats <span>Denninger</span></a>
+    </div>
     <div class="nav-right">
       <ul class="nav-links" id="navLinks">
         <li><a href="#angebot">Angebot</a></li>
@@ -652,12 +707,13 @@
 <main id="inhalt">
 
 <header class="hero" id="top">
+  <div class="hero-shader" data-shader-gradient aria-hidden="true"></div>
   <div class="hero-eyebrow hero-anim">KI-Automatisierung für Vertrieb, Verwaltung &amp; Handwerk</div>
   <h1 class="hero-anim">Ihr Team tippt ab,<br><span class="accent">was längst von selbst laufen könnte.</span></h1>
   <p class="hero-anim">Ich finde die Zeitfresser in Ihren Prozessen und automatisiere sie mit KI. Nach vier Wochen wissen Sie, wie viele Stunden pro Woche drin sind — und der erste Prozess läuft bereits.</p>
   <div class="hero-cta hero-anim">
-    <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen — 30 Min., kostenlos</a>
-    <a class="btn btn-secondary" href="#demo">Erst die Demo testen</a>
+    <a class="btn btn-primary pill" href="#kontakt">Erstgespräch buchen — 30 Min., kostenlos</a>
+    <a class="btn btn-secondary pill" href="#demo">Erst die Demo testen</a>
   </div>
   <ul class="hero-facts hero-anim">
     <li><strong>2.900 €</strong> Festpreis, keine Nachberechnung</li>
@@ -744,8 +800,8 @@
         <div class="capacity"><span class="dot"></span> Ich nehme zwei Projekte pro Monat an, weil ich sie selbst durchführe.</div>
 
         <div class="offer-actions">
-          <a class="btn btn-primary" href="#kontakt">Erstgespräch buchen</a>
-          <a class="btn btn-secondary" href="#ablauf">Ablauf ansehen</a>
+          <a class="btn btn-primary pill" href="#kontakt">Erstgespräch buchen</a>
+          <a class="btn btn-secondary pill" href="#ablauf">Ablauf ansehen</a>
         </div>
       </div>
     </div>
@@ -836,7 +892,10 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
     <h2>Wer hier eigentlich schreibt.</h2>
     <div class="about-grid">
       <div class="about-portrait reveal reveal-left">
-        <div class="portrait-placeholder">MD</div>
+        <div class="portrait-placeholder">
+          <span class="portrait-fallback">MD</span>
+          <canvas class="portrait-canvas" data-liquid-logo="MD" aria-hidden="true"></canvas>
+        </div>
       </div>
       <div class="about-text reveal reveal-right">
         <p>Mein Name ist <strong>Mats Denninger</strong>. Ich automatisiere Prozesse in Vertrieb, Verwaltung und Handwerk mit KI — und zwar die, die Ihre Leute jeden Tag Zeit kosten.</p>
@@ -891,10 +950,10 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
           <p>Sie schildern, wo bei Ihnen Zeit verloren geht. Ich sage Ihnen ehrlich, ob sich das automatisieren lässt und ob sich der Zeitgewinn-Check für Sie rechnet. Falls nicht, sage ich das auch — dann haben wir beide dreißig Minuten gut investiert.</p>
           <a class="btn btn-primary btn-small" id="bookingBtn" href="#contactForm">Termin vorschlagen</a>
         </div>
-        <div class="contact-detail"><span class="ci">✉</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
-        <div class="contact-detail"><span class="ci">📍</span> Amselstraße 48, 40627 Düsseldorf</div>
-        <div class="contact-detail"><span class="ci">💻</span> Remote und per Videocall · vor Ort im Raum Düsseldorf</div>
-        <div class="contact-detail"><span class="ci">⏱</span> Antwort innerhalb von 24 Stunden</div>
+        <div class="contact-detail"><span class="ci">E-Mail</span> <a href="mailto:matsdenninger@gmail.com">matsdenninger@gmail.com</a></div>
+        <div class="contact-detail"><span class="ci">Adresse</span> Amselstraße 48, 40627 Düsseldorf</div>
+        <div class="contact-detail"><span class="ci">Arbeitsweise</span> Remote und per Videocall · vor Ort im Raum Düsseldorf</div>
+        <div class="contact-detail"><span class="ci">Reaktion</span> Antwort innerhalb von 24 Stunden</div>
       </div>
       <form id="contactForm" class="reveal reveal-right">
         <div class="field">
@@ -913,7 +972,7 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
           <label for="cMsg">Wo geht bei Ihnen Zeit verloren?</label>
           <textarea id="cMsg" name="message" required placeholder="Ein, zwei Sätze genügen."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Erstgespräch anfragen</button>
+        <button type="submit" class="btn btn-primary pill">Erstgespräch anfragen</button>
         <p class="form-note">Kein Newsletter, keine Weitergabe Ihrer Daten. Antwort innerhalb von 24 Stunden.</p>
         <div class="form-status" id="formStatus" role="status" hidden></div>
       </form>
@@ -927,6 +986,7 @@ Antworte präzise, ohne Füllwörter, auf Deutsch.</div>
   <div class="footer-inner">
     <p>© 2026 Mats Denninger — KI-Automatisierung</p>
     <div class="footer-links">
+      <a href="index.html">Startseite</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </div>
@@ -1171,6 +1231,10 @@ runBtn.addEventListener('click', async () => {
   }
 });
 </script>
+
+<script type="module" src="assets/shader-gradient/shader-gradient.js"></script>
+<script src="vendor/liquid-logo/liquid-logo.js"></script>
+<script src="vendor/liquid-logo/liquid-logo-init.js"></script>
 
 </body>
 </html>

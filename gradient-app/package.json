@@ -1,0 +1,25 @@
+{
+  "name": "kiberatung-gradient-app",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Kleine React/R3F-Insel, die einen ShaderGradient-Hintergrund fuer die Hero-Bereiche der Website baut. Wird per Vite zu statischem JS/CSS gebaut und das Ergebnis in ../assets/shader-gradient/ eingecheckt.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@shadergradient/react": "^2.4.20",
+    "@react-three/fiber": "^9.7.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "^0.186.0",
+    "three-stdlib": "^2.36.1",
+    "camera-controls": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  }
+}

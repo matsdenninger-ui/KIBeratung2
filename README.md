@@ -13,8 +13,68 @@ Live-Demo mit Claude versorgt.
 | `datenschutz.html` | Datenschutzerklaerung, beschreibt die echten Datenfluesse |
 | `src/index.js` | Cloudflare Worker, der den Anthropic-Key hält |
 | `wrangler.toml` | Worker-Konfiguration |
+| `gradient-app/` | React/Vite-Miniprojekt, das den animierten ShaderGradient-Hero-Hintergrund baut (siehe `gradient-app/README.md`) |
+| `assets/shader-gradient/` | Gebautes Ergebnis von `gradient-app/` — wird mit committet, kein Build-Schritt beim Hosting nötig |
+| `vendor/liquid-logo/` | Vanilla-JS-Portierung des Liquid-Metal-Shaders von [liquid.paper.design](https://liquid.paper.design) fürs "MD"-Monogramm, PolyForm-Shield-lizenziert |
 
 Das dunkle Farbschema ist der Stand von `main` und bleibt unverändert.
+
+## Shader-Gradient-Hero (React/Vite-Insel)
+
+Die Hero-Bereiche von `index.html` und `potenzialanalyse.html` haben
+einen animierten, dreidimensionalen Farbverlauf
+([ShaderGradient](https://github.com/ruucm/shadergradient)/
+[react-three-fiber](https://github.com/pmndrs/react-three-fiber)) in
+Gold/Wein/Anthrazit als Hintergrund. Das ist die einzige Stelle der
+Website, die einen Build-Schritt braucht — siehe `gradient-app/README.md`
+für Details. Nach Änderungen dort **`npm run build` ausführen und die
+neue `assets/shader-gradient/shader-gradient.js` mit committen** — die
+Website selbst lädt nur die fertig gebaute Datei, kein Build beim
+Deployment nötig.
+
+## Buttons
+
+Alle klickbaren Buttons (Nav-CTA, Primary-/Secondary-Buttons, "Termin
+vorschlagen", Formular-Submit, "Nachricht kopieren") sind echte
+`<a>`/`<button>`-Elemente mit voller nativer Semantik (Tastatur, No-JS,
+Formulare funktionieren unabhängig vom Styling). Optik: ein mehrstufiger,
+statischer Metall-Verlauf (Gold für primäre Buttons, dunkles Bronze für
+sekundäre) mit Bevel-Highlight per `inset box-shadow` — angelehnt an die
+Farbgebung des Liquid-Metal-Monogramms (siehe unten), aber bewusst
+statisch statt animiert. Dazu das einheitliche Hover-Verhalten (leichtes
+Anheben `translateY(-2px)` plus wanderndes Glanzlicht `::after` mit
+`@keyframes shine`).
+
+Frühere Versuche, hierfür echtes WebGL-"Liquid Glass" (liquid-glass-js +
+html2canvas, vormals `vendor/liquid-glass/`) einzusetzen, wurden nach
+mehreren Runden wieder verworfen: auf echtem iOS/Safari zeigte das
+WebGL-Glas bei (fast) vollrunden Formen (Kreise, Pillen) einen sichtbaren
+Rendering-Fehler (verschobene/kleinere Glas-Kontur, "Geisterbild"), der
+sich in Chromium nicht reproduzieren ließ, und selbst bei moderatem
+Radius blieb ein zusätzlicher WebGL-Kontext pro Button unnötiges Gewicht.
+Das reine-CSS-Metall sieht dem "Liquid"-Look sehr ähnlich, ohne dieses
+Risiko oder die Kosten zusätzlicher Canvas-Elemente.
+
+## Liquid-Metal-Monogramm (liquid-logo)
+
+Das "MD"-Monogramm im Über-mich-Bereich von `potenzialanalyse.html` ist
+ein von [liquid.paper.design](https://liquid.paper.design) portierter
+WebGL2-Shader (Original: React/Next.js, hier zu Vanilla JS ohne Framework
+umgebaut, Farben auf Gold/Wein statt Chrom/Silber umgestellt). Der
+Original-Code steht unter der PolyForm-Shield-Lizenz (`vendor/liquid-logo/LICENSE`):
+jede Nutzung ist erlaubt außer ein zu liquid.paper.design konkurrierendes
+Produkt — unser Einsatz als Deko-Monogramm fällt nicht darunter.
+
+- Rendert das Monogramm als Canvas-Text und baut daraus per
+  Poisson-ähnlicher Verrundung eine Reliefkarte, die der Shader dann als
+  flüssiges Metall animiert. Läuft komplett clientseitig, keine
+  Bilddatei nötig.
+- Erst per `IntersectionObserver` gemountet, wenn der Bereich in den
+  Viewport scrollt — spart einen WebGL-Kontext beim initialen Laden.
+- Schlägt WebGL2 fehl (älterer Browser, Kontext-Limit durch den bereits
+  aktiven Shader-Gradient-Kontext erreicht o. Ä.), bleibt der
+  dahinterliegende, statische "MD"-Text sichtbar — kein Fehlerbild, nur
+  ein `console.warn`.
 
 ## Was an dieser Fassung anders ist
 
